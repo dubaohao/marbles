@@ -38,8 +38,12 @@ $(document).on('ready', function () {
 			v: 1
 		};
 		console.log('creating marble, sending', obj);
+<<<<<<< HEAD
 		// $('#createPanel').fadeOut();
 		$('#createCertificates').fadeOut();
+=======
+		$('#createPanel').fadeOut();
+>>>>>>> dceae5cf9418cba904df6c0794267043352f7919
 		$('#tint').fadeOut();
 
 		show_tx_step({ state: 'building_proposal' }, function () {
@@ -53,6 +57,7 @@ $(document).on('ready', function () {
 
 		return false;
 	});
+<<<<<<< HEAD
 //dubaohao-------
 // function UpdateMarble(that){
 	
@@ -90,6 +95,8 @@ $(document).on('ready', function () {
 		// return true;
 	});
 // }
+=======
+>>>>>>> dceae5cf9418cba904df6c0794267043352f7919
 
 	//fix marble owner panel (don't filter/hide it)
 	$(document).on('click', '.marblesFix', function () {
@@ -194,8 +201,12 @@ $(document).on('ready', function () {
 	//open create marble panel
 	$(document).on('click', '.addMarble', function () {
 		$('#tint').fadeIn();
+<<<<<<< HEAD
 		// $('#createPanel').fadeIn();
 		$('#createCertificates').fadeIn();
+=======
+		$('#createPanel').fadeIn();
+>>>>>>> dceae5cf9418cba904df6c0794267043352f7919
 		var company = $(this).parents('.innerMarbleWrap').parents('.marblesWrap').attr('company');
 		var username = $(this).parents('.innerMarbleWrap').parents('.marblesWrap').attr('username');
 		var owner_id = $(this).parents('.innerMarbleWrap').parents('.marblesWrap').attr('owner_id');
@@ -204,6 +215,7 @@ $(document).on('ready', function () {
 		$('input[name="owner_id"]').val(owner_id);
 	});
 
+<<<<<<< HEAD
 	// //dubaohao------open update marble panel
 	// $(document).on('click', '.updateMarble', function () {
 	// 	// console.log('dubaohao',JSON.stringify($(this)));
@@ -218,12 +230,18 @@ $(document).on('ready', function () {
 	// 	$('input[name="owner_id"]').val(owner_id);
 	// });
 
+=======
+>>>>>>> dceae5cf9418cba904df6c0794267043352f7919
 	//close create marble panel
 	$('#tint').click(function () {
 		if ($('#startUpPanel').is(':visible')) return;
 		if ($('#txStoryPanel').is(':visible')) return;
+<<<<<<< HEAD
 		//  $('#createPanel, #tint, #settingsPanel').fadeOut();
 		$('#createCertificates, #tint, #settingsPanel').fadeOut();
+=======
+		$('#createPanel, #tint, #settingsPanel').fadeOut();
+>>>>>>> dceae5cf9418cba904df6c0794267043352f7919
 	});
 
 	//notification drawer
@@ -249,6 +267,7 @@ $(document).on('ready', function () {
 		$('#settingsPanel, #tint').fadeOut();
 	});
 
+<<<<<<< HEAD
 //-dubaohao-------------- 教育
 	// $('#createCertificatesButton').click(function () {
 	// 	$('#tint').fadeIn();
@@ -309,6 +328,8 @@ $(document).on('ready', function () {
 	// });
 
 
+=======
+>>>>>>> dceae5cf9418cba904df6c0794267043352f7919
 	//story mode selection
 	$('#disableStoryMode').click(function () {
 		set_story_mode('off');
@@ -319,8 +340,12 @@ $(document).on('ready', function () {
 
 	//close create panel
 	$('#closeCreate').click(function () {
+<<<<<<< HEAD
 		// $('#createPanel, #tint').fadeOut();
 		$('#createCertificates, #tint').fadeOut();
+=======
+		$('#createPanel, #tint').fadeOut();
+>>>>>>> dceae5cf9418cba904df6c0794267043352f7919
 	});
 
 	//change size of marble
@@ -338,6 +363,7 @@ $(document).on('ready', function () {
 
 	//left click audits marble
 	$(document).on('click', '.ball', function () {
+<<<<<<< HEAD
 		//console.log('点击的弹珠属性值为：',$(this));
 		auditMarble(this, false);
 		auditUpdateMarble(this,false);
@@ -350,6 +376,13 @@ $(document).on('ready', function () {
 		// console.log('点击audits button的this：',$(that));
 		var marble_id = $(that).attr('id');
 		// console.log('dududududdduud',marble_id);
+=======
+		auditMarble(this, false);
+	});
+
+	function auditMarble(that, open) {
+		var marble_id = $(that).attr('id');
+>>>>>>> dceae5cf9418cba904df6c0794267043352f7919
 		$('.auditingMarble').removeClass('auditingMarble');
 
 		if (!auditingMarble || marbles[marble_id].id != auditingMarble.id) {//different marble than before!
@@ -364,9 +397,13 @@ $(document).on('ready', function () {
 			$(that).addClass('auditingMarble');
 			$('#auditContentWrap').fadeIn();
 			$('#marbleId').html(marble_id);
+<<<<<<< HEAD
 			$('#ImgPath').html('"/imgs/person.jpg"');//////弹珠换成人物头像照片
 			var color = marbles[marble_id].color;
 			// console.log('!!!!!!!!',color)
+=======
+			var color = marbles[marble_id].color;
+>>>>>>> dceae5cf9418cba904df6c0794267043352f7919
 			for (var i in bgcolors) $('.auditMarble').removeClass(bgcolors[i]);	//reset
 			$('.auditMarble').addClass(color.toLowerCase() + 'bg');
 
@@ -377,6 +414,7 @@ $(document).on('ready', function () {
 				type: 'audit',
 				marble_id: marble_id
 			};
+<<<<<<< HEAD
 			//console.log('读报好',JSON.stringify(obj2));
 			ws.send(JSON.stringify(obj2));
 		}
@@ -423,6 +461,10 @@ $(document).on('ready', function () {
 			$('input[name="company"]').val(company);
 			$('input[name="owner_id"]').val(owner_id);
 		});
+=======
+			ws.send(JSON.stringify(obj2));
+		}
+>>>>>>> dceae5cf9418cba904df6c0794267043352f7919
 	}
 
 	$('#auditClose').click(function () {
@@ -485,4 +527,8 @@ function set_story_mode(setting) {
 		$('#storyStatus').removeClass('storyOn').html('off');
 		window.localStorage.setItem(lsKey, JSON.stringify(fromLS));		//save
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> dceae5cf9418cba904df6c0794267043352f7919

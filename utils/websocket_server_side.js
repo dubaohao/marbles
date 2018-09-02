@@ -89,7 +89,10 @@ module.exports = function (cp, fcw, logger) {
 
 		// transfer a marble
 		else if (data.type === 'transfer_marble') {
+<<<<<<< HEAD
 			console.log("transfer进入server了！！！");
+=======
+>>>>>>> dceae5cf9418cba904df6c0794267043352f7919
 			logger.info('[ws] transferring req');
 			options.args = {
 				marble_id: data.id,
@@ -103,6 +106,7 @@ module.exports = function (cp, fcw, logger) {
 			});
 		}
 
+<<<<<<< HEAD
 //dubaohao----------- update a marble
 		else if (data.type === 'update_marbleInfo') {
 			console.log("update进入server了！！！");
@@ -138,6 +142,8 @@ module.exports = function (cp, fcw, logger) {
 			});
 		}
 
+=======
+>>>>>>> dceae5cf9418cba904df6c0794267043352f7919
 		// delete marble
 		else if (data.type === 'delete_marble') {
 			logger.info('[ws] delete marble req');

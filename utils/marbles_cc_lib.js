@@ -124,7 +124,10 @@ module.exports = function (enrollObj, g_options, fcw, logger) {
 	//set marble owner
 	marbles_chaincode.set_marble_owner = function (options, cb) {
 		console.log('');
+<<<<<<< HEAD
 		console.log('1set_owner进入marbles_lib文件了!!');
+=======
+>>>>>>> dceae5cf9418cba904df6c0794267043352f7919
 		logger.info('Setting marble owner...');
 
 		var opts = {
@@ -143,6 +146,7 @@ module.exports = function (enrollObj, g_options, fcw, logger) {
 				options.args.auth_company
 			],
 		};
+<<<<<<< HEAD
 		//console.log('set',enrollObj,cb);
 		fcw.invoke_chaincode(enrollObj, opts, cb);
 	};
@@ -175,6 +179,11 @@ module.exports = function (enrollObj, g_options, fcw, logger) {
 			fcw.invoke_chaincode(enrollObj, opts, cb);
 		};
 
+=======
+		fcw.invoke_chaincode(enrollObj, opts, cb);
+	};
+
+>>>>>>> dceae5cf9418cba904df6c0794267043352f7919
 	//delete marble
 	marbles_chaincode.delete_marble = function (options, cb) {
 		console.log('');

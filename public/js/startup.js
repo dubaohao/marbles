@@ -236,5 +236,9 @@ function show_start_up_step(obj) {
 		}
 	}
 
+<<<<<<< HEAD
 	$('#showStartupPanel, #showSettingsPanel, #createCertificatesButton, #personInfo,#showCertificates,#testCertificates,#inquireUpInfo,#dateTrace,#checkConsistency').prop('disabled', false);
+=======
+	$('#showStartupPanel, #showSettingsPanel').prop('disabled', false);
+>>>>>>> dceae5cf9418cba904df6c0794267043352f7919
 }
