@@ -1,0 +1,79 @@
+#homePanel.panel
+	div
+		#tips
+			span Tips: Simply 
+			strong drag 
+			span and 
+			strong drop 
+			span a marble from one user to another
+
+			//- span &nbsp;&nbsp;
+
+			//- button(disabled="disabled")#personInfo
+			//- 	span.fa.fa-gear
+			//- 	span &nbsp;个人信息
+
+			//- span &nbsp;&nbsp;
+
+			//- button(disabled="disabled")#showCertificates
+			//- 	span.fa.fa-gear
+			//- 	span &nbsp; 证书查询
+
+			//- span &nbsp;&nbsp;
+
+			//- button(disabled="disabled")#testCertificates
+			//- 	span.fa.fa-gear
+			//- 	span &nbsp; 虚假信息检验
+
+			//- span &nbsp;&nbsp;
+
+			//- button(disabled="disabled")#inquireUpInfo
+			//- 	span.fa.fa-gear
+			//- 	span &nbsp; 上链信息查询
+
+			//- span &nbsp;&nbsp;
+
+			//- button(disabled="disabled")#dateTrace
+			//- 	span.fa.fa-gear
+			//- 	span &nbsp; 数据修改溯源
+
+			//- span &nbsp;&nbsp;
+
+			//- button(disabled="disabled")#checkConsistency
+			//- 	span.fa.fa-gear
+			//- 	span &nbsp; 上下届文件一致性检验
+
+		#ownerWrap
+			div#toolbarWrap
+				.bottomAlign
+					input(type="text" placeholder="Search Marble Owners" style="margin-left: 0; border-radius:2px;")#searchUsers.longer
+					span.hint(style="margin-left: 10px; font-size: 16px;") 
+						span#foundUsers 0
+						span /
+						span#totalUsers 0
+
+				button(disabled="disabled")#showStartupPanel
+					span.fa.fa-gears
+					span &nbsp; Start Up Help
+					
+				span &nbsp;&nbsp;
+
+				button(disabled="disabled")#showSettingsPanel
+					span.fa.fa-gear
+					span &nbsp; Settings
+
+				span &nbsp;&nbsp;
+
+				//- button(disabled="disabled")#createCertificatesButton
+				//- 	span.fa.fa-gear
+				//- 	span &nbsp; 证书
+				
+				#trashbin.sortable.innerMarbleWrap
+					div.fa.fa-trash-o.fa-3x(style="vertical-align: middle;")
+					span &nbsp;
+					div#trashText Drag and drop marble to remove
+			
+
+
+		#allUserPanelsWrap
+			#appStartingText Connecting...
