@@ -310,7 +310,6 @@ $auditSize: 333px;
 	width: 75px;
 	line-height: 75px;
 }
-<<<<<<< HEAD
 .updateMarble{
 	line-height: 75px;
 	margin-left: 10px;
@@ -333,8 +332,6 @@ $auditSize: 333px;
 	width: 75px;
 	line-height: 75px;
 }
-=======
->>>>>>> dceae5cf9418cba904df6c0794267043352f7919
 .createball{
 	display: inline-block;
 	font-size:275px;
@@ -370,20 +367,69 @@ $auditSize: 333px;
 	margin-left: -265px;
 	width: 410px;
 }
-<<<<<<< HEAD
-//dubaohao--------------增加证书
+//dubaohao--------------增加和修改证书
 #createCertificates{
 	position: fixed;
-	top: 75px;
+	top: 50px;
 	background: #343d48;
 	z-index: 1005;
 	padding: 40px 60px;
 	left: 50%;
-	margin-left: -265px;
-	width: 410px;
+	margin-left: -445px;
+	width: 780px;
+	height:600px;
+	display: none;
+	// overflow-y: auto;
 }
-=======
->>>>>>> dceae5cf9418cba904df6c0794267043352f7919
+#updateCertificates{
+	position: fixed;
+	top: 50px;
+	background: #343d48;
+	z-index: 1005;
+	padding: 40px 60px;
+	left: 50%;
+	margin-left: -445px;
+	width: 780px;
+	height:600px;
+	display: none;
+	// overflow-y: auto;
+}
+#certs{
+	position: relative;
+	vertical-align: bottom;
+	text-align: center;
+	font-size: 14px;
+	display: inline-block;
+	margin-left: 10px;
+	margin-right:10px;
+	// left: 100%;
+	margin-top: 5px;
+	margin-bottom: 30px;
+	height:500px;
+	overflow-y: auto;
+	background-color:#ffecec;/*表格外背景颜色*/
+	font-family:arial,verdana,sans-serif;font-size:14px;
+	table{border:1px solid #666666;}/*table最外面的边框的颜色属性*/
+	th{border:0px solid; background-color:#999999; padding:4px;	}/*th距离边框的padding*/
+	.odd{background-color:#efefef;}/*浅灰色：这里覆盖了深一些的灰色*/
+	/*odd在tr里面，浅色覆盖深色，即odd覆盖tr，尽管odd在tr里面*/
+	tr{background-color:#cccccc;}/*比浅灰色深了点*/
+	td{color:#111111;/*字体颜色*/padding:2px;/*字体距离边框的距离*/}
+	img{width:200px;}
+}
+.column1{
+	// float:center;
+	width:100%;
+	color:#000;
+	// background-color:#FFFFFF;
+	padding:center 10px 0px 10%;
+	margin-top:0px;
+	text-align:center;
+	// height:900px;
+	font-size:24px; 
+	font-weight:normal;
+}
+// ------------------------------------------------
 #tint{
 	display:none;
 	background: #000;
@@ -727,10 +773,24 @@ $marble_left: 0;
 	right: 15px;
 	top: 15px;
 }
+
 #closeStartUp:hover, #closeTxStoryPos:hover, #closeSettings:hover, #closeCreate:hover, #closePos:hover{
 	color: $hi_color1;
 	cursor: pointer;
 }
+
+// dubaohao--------#closeCreateCert
+#closeCreateCert,#closeUpdateCert{
+	position: absolute;
+	right: 15px;
+	top: 15px;
+}
+#closeCreateCert:hover,#closeUpdateCert:hover{
+	color: $hi_color1;
+	cursor: pointer;
+}
+// --------------------------------
+
 #appStartingText{
 	text-align: center;
 	font-size: 24px;

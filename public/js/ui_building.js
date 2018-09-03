@@ -202,7 +202,6 @@ function build_a_tx(data, pos) {
 		id = data.value.owner.id;
 	}
 
-<<<<<<< HEAD
 	// html += `<div class="txDetails">
 	// 			<div class="txCount">TX ` + (Number(pos) + 1) + `</div>
 	// 			<p>
@@ -439,26 +438,5 @@ function build_a_tx(data, pos) {
 	// 			</ul>
 	// 		</div>`;
 
-=======
-	html += `<div class="txDetails">
-				<div class="txCount">TX ` + (Number(pos) + 1) + `</div>
-				<p>
-					<div class="marbleLegend">Transaction: </div>
-					<div class="marbleName txId">` + data.txId.substring(0, 14) + `...</div>
-				</p>
-				<p>
-					<div class="marbleLegend">Owner: </div>
-					<div class="marbleName">` + username + `</div>
-				</p>
-				<p>
-					<div class="marbleLegend">Company: </div>
-					<div class="marbleName">` + company + `</div>
-				</p>
-				<p>
-					<div class="marbleLegend">Ower Id: </div>
-					<div class="marbleName">` + id + `</div>
-				</p>
-			</div>`;
->>>>>>> dceae5cf9418cba904df6c0794267043352f7919
 	return html;
 }

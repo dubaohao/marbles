@@ -224,7 +224,6 @@ function transfer_marble(marbleId, to_owner_id) {
 	});
 }
 
-<<<<<<< HEAD
 //dubaohao--------update_marbleInfo selected ball to user
 function update_marbleInfo(marbleId,color,size,owner_id) {
 	show_tx_step({ state: 'building_proposal' }, function () {
@@ -257,8 +256,6 @@ function update_marbleInfo2(marbleId, to_owner_id,color,size) {
 	});
 }
 
-=======
->>>>>>> dceae5cf9418cba904df6c0794267043352f7919
 //record the compan, show notice if its new
 function record_company(company) {
 	if (known_companies[company]) return;										//if i've seen it before, stop

@@ -2,6 +2,7 @@
 /* global toTitleCase, connect_to_server, refreshHomePanel, closeNoticePanel, openNoticePanel, show_tx_step, marbles*/
 /* global pendingTxDrawing:true */
 /* exported record_company, autoCloseNoticePanel, start_up, block_ui_delay*/
+///弹珠修改为证书，若使用弹珠，需要修改注释掉的行数，选择其一（248,249）（399,400）
 var ws = {};
 var bgcolors = ['whitebg', 'blackbg', 'redbg', 'greenbg', 'bluebg', 'purplebg', 'pinkbg', 'orangebg', 'yellowbg'];
 var autoCloseNoticePanel = null;
@@ -38,12 +39,8 @@ $(document).on('ready', function () {
 			v: 1
 		};
 		console.log('creating marble, sending', obj);
-<<<<<<< HEAD
-		// $('#createPanel').fadeOut();
-		$('#createCertificates').fadeOut();
-=======
 		$('#createPanel').fadeOut();
->>>>>>> dceae5cf9418cba904df6c0794267043352f7919
+		// $('#createCertificates').fadeOut();
 		$('#tint').fadeOut();
 
 		show_tx_step({ state: 'building_proposal' }, function () {
@@ -57,8 +54,7 @@ $(document).on('ready', function () {
 
 		return false;
 	});
-<<<<<<< HEAD
-//dubaohao-------
+//dubaohao-------修改弹珠
 // function UpdateMarble(that){
 	
 	$('#updateMarbleButton').click(function () {
@@ -78,8 +74,8 @@ $(document).on('ready', function () {
 		console.log(auditingMarble.id);
 		console.log('update marbleInfo, sending',obj);
 		update_marbleInfo(auditingMarble.id,obj.color,obj.size,obj.owner_id);
-		// $('#createPanel').fadeOut();
-		$('#createCertificates').fadeOut();
+		$('#createPanel').fadeOut();
+		// $('#createCertificates').fadeOut();
 		$('#tint').fadeOut();
 
 		// show_tx_step({ state: 'building_proposal' }, function () {
@@ -95,8 +91,57 @@ $(document).on('ready', function () {
 		// return true;
 	});
 // }
-=======
->>>>>>> dceae5cf9418cba904df6c0794267043352f7919
+
+//dubaohao-----------新增和更新证书---------------------------------------------------------------------
+$('#createCertButton').click(function () {
+	console.log('creating marble');
+	var obj = {
+		type: 'create',
+		color: $('.colorSelected').attr('color'),
+		size: $('select[name="size"]').val(),
+		username: $('select[name="user"]').val(),
+		company: $('input[name="company"]').val(),
+		owner_id: $('input[name="owner_id"]').val(),
+		v: 1
+	};
+	console.log('creating marble, sending', obj)
+	$('#createCertificates').fadeOut();
+
+	$('#tint').fadeOut();
+
+	show_tx_step({ state: 'building_proposal' }, function () {
+		ws.send(JSON.stringify(obj));
+
+		refreshHomePanel();
+		$('.colorValue').html('Color');											//reset
+		for (var i in bgcolors) $('.createball').removeClass(bgcolors[i]);		//reset
+		$('.createball').css('border', '2px dashed #fff');						//reset
+	});
+
+	return false;
+});
+
+$('#updateCertButton').click(function () {
+	console.log('update marbleInfo');
+	var obj = {
+		type: 'update_marbleInfo',
+		color: $('.colorSelected').attr('color'),
+		size: $('select[name="size"]').val(),
+		username: $('select[name="user"]').val(),
+		company: $('input[name="company"]').val(),
+		owner_id: $('input[name="owner_id"]').val(),
+		v: 1
+	};
+	// console.log(marbleId);
+	console.log(auditingMarble.id);
+	console.log('update marbleInfo, sending',obj);
+	update_marbleInfo(auditingMarble.id,obj.color,obj.size,obj.owner_id);
+	$('#updateCertificates').fadeOut();
+	$('#tint').fadeOut();
+		refreshHomePanel();
+	return false;
+});
+//----------------------------------------------------------------------------
 
 	//fix marble owner panel (don't filter/hide it)
 	$(document).on('click', '.marblesFix', function () {
@@ -201,12 +246,8 @@ $(document).on('ready', function () {
 	//open create marble panel
 	$(document).on('click', '.addMarble', function () {
 		$('#tint').fadeIn();
-<<<<<<< HEAD
 		// $('#createPanel').fadeIn();
 		$('#createCertificates').fadeIn();
-=======
-		$('#createPanel').fadeIn();
->>>>>>> dceae5cf9418cba904df6c0794267043352f7919
 		var company = $(this).parents('.innerMarbleWrap').parents('.marblesWrap').attr('company');
 		var username = $(this).parents('.innerMarbleWrap').parents('.marblesWrap').attr('username');
 		var owner_id = $(this).parents('.innerMarbleWrap').parents('.marblesWrap').attr('owner_id');
@@ -215,7 +256,6 @@ $(document).on('ready', function () {
 		$('input[name="owner_id"]').val(owner_id);
 	});
 
-<<<<<<< HEAD
 	// //dubaohao------open update marble panel
 	// $(document).on('click', '.updateMarble', function () {
 	// 	// console.log('dubaohao',JSON.stringify($(this)));
@@ -230,18 +270,13 @@ $(document).on('ready', function () {
 	// 	$('input[name="owner_id"]').val(owner_id);
 	// });
 
-=======
->>>>>>> dceae5cf9418cba904df6c0794267043352f7919
 	//close create marble panel
 	$('#tint').click(function () {
 		if ($('#startUpPanel').is(':visible')) return;
 		if ($('#txStoryPanel').is(':visible')) return;
-<<<<<<< HEAD
-		//  $('#createPanel, #tint, #settingsPanel').fadeOut();
-		$('#createCertificates, #tint, #settingsPanel').fadeOut();
-=======
 		$('#createPanel, #tint, #settingsPanel').fadeOut();
->>>>>>> dceae5cf9418cba904df6c0794267043352f7919
+		$('#createCertificates, #tint, #settingsPanel').fadeOut();
+		$('#updateCertificates, #tint, #settingsPanel').fadeOut();
 	});
 
 	//notification drawer
@@ -267,7 +302,6 @@ $(document).on('ready', function () {
 		$('#settingsPanel, #tint').fadeOut();
 	});
 
-<<<<<<< HEAD
 //-dubaohao-------------- 教育
 	// $('#createCertificatesButton').click(function () {
 	// 	$('#tint').fadeIn();
@@ -328,8 +362,6 @@ $(document).on('ready', function () {
 	// });
 
 
-=======
->>>>>>> dceae5cf9418cba904df6c0794267043352f7919
 	//story mode selection
 	$('#disableStoryMode').click(function () {
 		set_story_mode('off');
@@ -340,13 +372,20 @@ $(document).on('ready', function () {
 
 	//close create panel
 	$('#closeCreate').click(function () {
-<<<<<<< HEAD
-		// $('#createPanel, #tint').fadeOut();
-		$('#createCertificates, #tint').fadeOut();
-=======
 		$('#createPanel, #tint').fadeOut();
->>>>>>> dceae5cf9418cba904df6c0794267043352f7919
+		// $('#createCertificates, #tint').fadeOut();
 	});
+
+	// dubaohao---------close create cert
+	$('#closeCreateCert').click(function () {
+		$('#createCertificates, #tint').fadeOut();
+
+	});
+	$('#closeUpdateCert').click(function () {
+		$('#updateCertificates, #tint').fadeOut();
+	});
+	//-------------------------------------------
+
 
 	//change size of marble
 	$('select[name="size"]').click(function () {
@@ -363,26 +402,24 @@ $(document).on('ready', function () {
 
 	//left click audits marble
 	$(document).on('click', '.ball', function () {
-<<<<<<< HEAD
 		//console.log('点击的弹珠属性值为：',$(this));
 		auditMarble(this, false);
-		auditUpdateMarble(this,false);
+		// auditUpdateMarble(this,false);
+		auditUpdateCert(this,false);
 		// $(this)='';
 		//UpdateMarble(this,false);
 		//console.log('核查this',this)
 	});
 
-	function auditMarble(that, open) {
-		// console.log('点击audits button的this：',$(that));
-		var marble_id = $(that).attr('id');
-		// console.log('dududududdduud',marble_id);
-=======
-		auditMarble(this, false);
-	});
+	// function auditMarble(that, open) {
+	// 	// console.log('点击audits button的this：',$(that));
+	// 	// var marble_id = $(that).attr('id');
+	// 	// console.log('dududududdduud',marble_id);
+	// 	auditMarble(this, false);
+	// };
 
 	function auditMarble(that, open) {
 		var marble_id = $(that).attr('id');
->>>>>>> dceae5cf9418cba904df6c0794267043352f7919
 		$('.auditingMarble').removeClass('auditingMarble');
 
 		if (!auditingMarble || marbles[marble_id].id != auditingMarble.id) {//different marble than before!
@@ -397,13 +434,9 @@ $(document).on('ready', function () {
 			$(that).addClass('auditingMarble');
 			$('#auditContentWrap').fadeIn();
 			$('#marbleId').html(marble_id);
-<<<<<<< HEAD
 			$('#ImgPath').html('"/imgs/person.jpg"');//////弹珠换成人物头像照片
 			var color = marbles[marble_id].color;
 			// console.log('!!!!!!!!',color)
-=======
-			var color = marbles[marble_id].color;
->>>>>>> dceae5cf9418cba904df6c0794267043352f7919
 			for (var i in bgcolors) $('.auditMarble').removeClass(bgcolors[i]);	//reset
 			$('.auditMarble').addClass(color.toLowerCase() + 'bg');
 
@@ -414,14 +447,14 @@ $(document).on('ready', function () {
 				type: 'audit',
 				marble_id: marble_id
 			};
-<<<<<<< HEAD
 			//console.log('读报好',JSON.stringify(obj2));
 			ws.send(JSON.stringify(obj2));
 		}
 			//console.log('dubaohao 查看当前 that值：',$(that));
 
 	}
-//dubaohao------open update marble panel
+//dubaohao----------------------------------------------------------------------------
+//弹珠-----------------------open update marble panel--------------------
 	function auditUpdateMarble(that,open) {
 		// console.log('[点击audits button的this[：',$(that));
 		var marble_id = $(that).attr('id');
@@ -432,8 +465,8 @@ $(document).on('ready', function () {
 			 //console.log('dubaohao',$(this).attr('color'));
 			//left click audits marble
 			$('#tint').fadeIn();
-			// $('#createPanel').fadeIn();
-			$('#createCertificates').fadeOut();
+			$('#createPanel').fadeIn();
+			// $('#createCertificates').fadeIn();
 			//初始化ball的颜色，大小
 			var color = marbles[marbleID].color;
 			var size = marbles[marbleID].size;
@@ -461,11 +494,46 @@ $(document).on('ready', function () {
 			$('input[name="company"]').val(company);
 			$('input[name="owner_id"]').val(owner_id);
 		});
-=======
-			ws.send(JSON.stringify(obj2));
-		}
->>>>>>> dceae5cf9418cba904df6c0794267043352f7919
 	}
+//证书
+	function auditUpdateCert(that,open) {
+		// console.log('[点击audits button的this[：',$(that));
+		var marble_id = $(that).attr('id');
+		marbleID=marble_id;
+		// console.log('[marble_id]',marble_id);
+		$('.updateMarble').click(function(){
+			 //console.log('dubaohao',$(this).attr('color'));
+			//left click audits marble
+			$('#tint').fadeIn();
+			// $('#createPanel').fadeIn();
+			$('#updateCertificates').fadeIn();
+			//初始化ball的颜色，大小
+			var color = marbles[marbleID].color;
+			var size = marbles[marbleID].size;
+			console.log('id',marbleID,'color:',color,'size:',size);
+			//ball的颜色和表单填写
+				var html = '<span class="fa fa-circle colorSelected ' + color + '" color="' + color + '"></span>';
+				$('.colorValue').html(html);
+				for (var i in bgcolors) $('.createball').removeClass(bgcolors[i]);		//remove prev color
+					$('.createball').css('border', '0').addClass(color + 'bg');				//set new color
+			//ball的大小 添加使ball的大小可以根据文本框里的值，不点击时自动同步
+			$('select[name="size"]').val(size);
+			//change size of marble
+			$('select[name="size"]').is(function () {
+				var size = $(this).val();
+				if (size === '16') $('.createball').animate({ 'height': 150, 'width': 150 }, { duration: 200 });
+				else $('.createball').animate({ 'height': 250, 'width': 250 }, { duration: 200 });
+			}); 
+			var company = $(that).attr('company');
+			var username = $(that).attr('username');
+			var owner_id = $(that).attr('owner_id');
+			//$('select[name="size"]').val(size);
+			$('select[name="user"]').html('<option value="' + username + '">' + toTitleCase(username) + '</option>');
+			$('input[name="company"]').val(company);
+			$('input[name="owner_id"]').val(owner_id);
+		});
+	}
+	// -----------------------------------------------
 
 	$('#auditClose').click(function () {
 		$('#auditContentWrap').slideUp(500);
@@ -527,8 +595,4 @@ function set_story_mode(setting) {
 		$('#storyStatus').removeClass('storyOn').html('off');
 		window.localStorage.setItem(lsKey, JSON.stringify(fromLS));		//save
 	}
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> dceae5cf9418cba904df6c0794267043352f7919
