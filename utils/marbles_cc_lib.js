@@ -105,6 +105,94 @@ module.exports = function (enrollObj, g_options, fcw, logger) {
 		});
 	};
 
+		//create a marble
+	marbles_chaincode.create_a_marble = function (options, cb) {
+		console.log('');
+		logger.info('Creating a marble...');
+
+		var opts = {
+			peer_urls: g_options.peer_urls,
+			peer_tls_opts: g_options.peer_tls_opts,
+			channel_id: g_options.channel_id,
+			chaincode_id: g_options.chaincode_id,
+			chaincode_version: g_options.chaincode_version,
+			event_urls: g_options.event_urls,
+			endorsed_hook: options.endorsed_hook,
+			ordered_hook: options.ordered_hook,
+			cc_function: 'init_marble',
+			cc_args: [
+				'm' + leftPad(Date.now() + randStr(5), 19),
+				options.args.color,
+				options.args.size,
+				options.args.owner_id,
+				options.args.auth_company
+			],
+		};
+		fcw.invoke_chaincode(enrollObj, opts, function (err, resp) {
+			if (cb) {
+				if (!resp) resp = {};
+				resp.id = opts.cc_args[0];			//pass marble id back
+				cb(err, resp);
+			}
+		});
+	};
+
+	//dubaohao--------------------------create a cert
+	marbles_chaincode.create_a_cert = function (options, cb) {
+		console.log('');
+		logger.info('Creating a cert...');
+
+		var opts = {
+			peer_urls: g_options.peer_urls,
+			peer_tls_opts: g_options.peer_tls_opts,
+			channel_id: g_options.channel_id,
+			chaincode_id: g_options.chaincode_id,
+			chaincode_version: g_options.chaincode_version,
+			event_urls: g_options.event_urls,
+			endorsed_hook: options.endorsed_hook,
+			ordered_hook: options.ordered_hook,
+			cc_function: 'init_cert',
+			cc_args: [
+				'm' + leftPad(Date.now() + randStr(5), 19),
+				options.args.owner_id,
+				options.args.auth_company,
+
+				options.args.data1,
+				options.args.data2,
+				options.args.data3,
+				options.args.data4,
+				options.args.data5,
+
+				options.args.data6,
+				options.args.data7,
+				options.args.data8,
+				options.args.data9,
+				options.args.data10,
+
+				options.args.data11,
+				options.args.data12,
+				options.args.data13,
+				// options.args.data14,
+				// options.args.data15,
+
+				// options.args.data16,
+				// options.args.data17,
+				// options.args.data18,
+				// options.args.data19,
+				// options.args.data20,
+
+			],
+		};
+		// console.log("杜保皓cc_lib",opts);
+		fcw.invoke_chaincode(enrollObj, opts, function (err, resp) {
+			if (cb) {
+				if (!resp) resp = {};
+				resp.id = opts.cc_args[0];			//pass marble id back
+				cb(err, resp);
+			}
+		});
+	};
+
 	//get marble
 	marbles_chaincode.get_marble = function (options, cb) {
 		logger.info('fetching marble ' + options.marble_id + ' list...');
@@ -120,6 +208,22 @@ module.exports = function (enrollObj, g_options, fcw, logger) {
 		};
 		fcw.query_chaincode(enrollObj, opts, cb);
 	};
+
+	// //dubaohao-------------------get marble
+	// marbles_chaincode.get_cert = function (options, cb) {
+	// 	logger.info('fetching marble ' + options.marble_id + ' list...');
+
+	// 	var opts = {
+	// 		peer_urls: g_options.peer_urls,
+	// 		peer_tls_opts: g_options.peer_tls_opts,
+	// 		channel_id: g_options.channel_id,
+	// 		chaincode_version: g_options.chaincode_version,
+	// 		chaincode_id: g_options.chaincode_id,
+	// 		cc_function: 'read',
+	// 		cc_args: [options.args.marble_id]   ////后期可能修改这个值为cert_id
+	// 	};
+	// 	fcw.query_chaincode(enrollObj, opts, cb);
+	// };
 
 	//set marble owner
 	marbles_chaincode.set_marble_owner = function (options, cb) {
@@ -175,6 +279,55 @@ module.exports = function (enrollObj, g_options, fcw, logger) {
 			fcw.invoke_chaincode(enrollObj, opts, cb);
 		};
 
+//dubaohao ---------update cert
+marbles_chaincode.update_marble_Info = function (options, cb) {
+	console.log('');
+	console.log('2update进入marbles_lib文件了!!');
+	logger.info('updatting marble owner...');
+
+	var opts = {
+		peer_urls: g_options.peer_urls,
+		peer_tls_opts: g_options.peer_tls_opts,
+		channel_id: g_options.channel_id,
+		chaincode_id: g_options.chaincode_id,
+		chaincode_version: g_options.chaincode_version,
+		event_urls: g_options.event_urls,
+		endorsed_hook: options.endorsed_hook,
+		ordered_hook: options.ordered_hook,
+		cc_function: 'update_marbleInfo',
+		cc_args: [
+			options.args.marble_id,
+			options.args.owner_id,
+			options.args.auth_company,
+			options.args.data1,
+			options.args.data2,
+			options.args.data3,
+			options.args.data4,
+			options.args.data5,
+
+			options.args.data6,
+			options.args.data7,
+			options.args.data8,
+			options.args.data9,
+			options.args.data10,
+
+			options.args.data11,
+			options.args.data12,
+			options.args.data13,
+			// options.args.data14,
+			// options.args.data15,
+
+			// options.args.data16,
+			// options.args.data17,
+			// options.args.data18,
+			// options.args.data19,
+			// options.args.data20,
+		],
+	};
+	//console.log('update_cert',enrollObj,cb);
+	fcw.invoke_chaincode(enrollObj, opts, cb);
+};
+
 	//delete marble
 	marbles_chaincode.delete_marble = function (options, cb) {
 		console.log('');
@@ -211,6 +364,7 @@ module.exports = function (enrollObj, g_options, fcw, logger) {
 			cc_function: 'getHistory',
 			cc_args: [options.args.id]
 		};
+		// console.log("杜保皓git_history",opts);
 		fcw.query_chaincode(enrollObj, opts, cb);
 	};
 
@@ -230,6 +384,7 @@ module.exports = function (enrollObj, g_options, fcw, logger) {
 			cc_function: 'getMarblesByRange',
 			cc_args: [options.args.start_id, options.args.stop_id]
 		};
+		// console.log("杜保皓get_multiple_keys",opts);
 		fcw.query_chaincode(enrollObj, opts, cb);
 	};
 
@@ -352,6 +507,7 @@ module.exports = function (enrollObj, g_options, fcw, logger) {
 			cc_function: 'read_everything',
 			cc_args: ['']
 		};
+		// console.log("杜保皓read_everythig",opts);
 		fcw.query_chaincode(enrollObj, opts, cb);
 	};
 

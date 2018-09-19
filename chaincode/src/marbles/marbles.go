@@ -37,11 +37,31 @@ type SimpleChaincode struct {
 
 // ----- Marbles ----- //
 type Marble struct {
-	ObjectType string        `json:"docType"` //field for couchdb
-	Id         string        `json:"id"`      //the fieldtags are needed to keep case from bouncing around
-	Color      string        `json:"color"`
-	Size       int           `json:"size"` //size in mm of marble
-	Owner      OwnerRelation `json:"owner"`
+	ObjectType string `json:"docType"` //field for couchdb
+	Id         string `json:"id"`      //the fieldtags are needed to keep case from bouncing around
+	// Color      string        `json:"color"`
+	// Size       int           `json:"size"` //size in mm of marble
+	Owner  OwnerRelation `json:"owner"`
+	data1  string        `json:"data1"`
+	data2  string        `json:"data2"`
+	data3  string        `json:"data3"`
+	data4  string        `json:"data4"`
+	data5  string        `json:"data5"`
+	data6  string        `json:"data6"`
+	data7  string        `json:"data7"`
+	data8  string        `json:"data8"`
+	data9  string        `json:"data9"`
+	data10 string        `json:"data10"`
+	data11 string        `json:"data11"`
+	data12 string        `json:"data12"`
+	data13 string        `json:"data13"`
+	// data14 string        `json:"data14"`
+	// data15 string        `json:"data15"`
+	// data16 string        `json:"data16"`
+	// data17 string        `json:"data17"`
+	// data18 string        `json:"data18"`
+	// data19 string        `json:"data19"`
+	// data20 string        `json:"data20"`
 }
 
 // ----- Owners ----- //
@@ -154,10 +174,14 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 		return delete_marble(stub, args)
 	} else if function == "init_marble" { //create a new marble
 		return init_marble(stub, args)
+	} else if function == "init_cert" { //create a new cert
+		return init_cert(stub, args)
 	} else if function == "set_owner" { //change owner of a marble
 		return set_owner(stub, args)
 	} else if function == "update_marbleInfo" { //change marbleInfo of a marble------------------dubaohao
 		return update_marbleInfo(stub, args)
+	} else if function == "update_certInfo" { //change marbleInfo of a marble------------------dubaohao
+		return update_certInfo(stub, args)
 	} else if function == "init_owner" { //create a new marble owner
 		return init_owner(stub, args)
 	} else if function == "read_everything" { //read everything, (owners + marbles + companies)

@@ -168,13 +168,13 @@ func init_marble(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 
 	//build the marble json string manually
 	str := `{
-		"docType":"marble", 
-		"id": "` + id + `", 
-		"color": "` + color + `", 
-		"size": ` + strconv.Itoa(size) + `, 
+		"docType":"marble",
+		"id": "` + id + `",
+		"color": "` + color + `",
+		"size": ` + strconv.Itoa(size) + `,
 		"owner": {
-			"id": "` + owner_id + `", 
-			"username": "` + owner.Username + `", 
+			"id": "` + owner_id + `",
+			"username": "` + owner.Username + `",
 			"company": "` + owner.Company + `"
 		}
 	}`
@@ -184,6 +184,117 @@ func init_marble(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	}
 
 	fmt.Println("- end init_marble")
+	return shim.Success(nil)
+}
+
+// ============================================================================================================================
+// Init Marble - create a new cert, store into chaincode state
+//
+// Shows off building a key's JSON value manually
+//
+// Inputs - Array of strings
+//      0      ,    1  ,  2  ,      3          ,       4
+//     id      ,  color, size,     owner id    ,  authing company
+// "m999999999", "blue", "35", "o9999999999999", "united marbles"
+// ============================================================================================================================
+func init_cert(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+	var err error
+	fmt.Println("starting init_cert")
+
+	// if len(args) != 5 {
+	// 	return shim.Error("Incorrect number of arguments. Expecting 5")
+	// }
+
+	//input sanitation
+	err = sanitize_arguments(args)
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+
+	id := args[0]
+	// color := strings.ToLower(args[1])
+	// size, err := strconv.Atoi(args[2])
+	owner_id := args[1]
+	authed_by_company := args[2]
+
+	data1 := args[3] //data1
+	data2 := args[4]
+	data3 := args[5]
+	data4 := args[6]
+	data5 := args[7]
+
+	data6 := args[8]
+	data7 := args[9]
+	data8 := args[10]
+	data9 := args[11]
+	data10 := args[12]
+
+	data11 := args[13]
+	data12 := args[14]
+	data13 := args[15]
+	// data14 := args[16]
+	// data15 := args[17]
+
+	// data16 := args[18]
+	// data17 := args[19]
+	// data18 := args[20]
+	// data19 := args[21]
+	// data20 := args[22] //data20
+
+	if err != nil {
+		return shim.Error("3rd argument must be a numeric string")
+	}
+
+	//check if new owner exists
+	owner, err := get_owner(stub, owner_id)
+	if err != nil {
+		fmt.Println("Failed to find owner - " + owner_id)
+		return shim.Error(err.Error())
+	}
+
+	//check authorizing company (see note in set_owner() about how this is quirky)
+	if owner.Company != authed_by_company {
+		return shim.Error("The company '" + authed_by_company + "' cannot authorize creation for '" + owner.Company + "'.")
+	}
+
+	//check if marble id already exists
+	marble, err := get_marble(stub, id)
+	if err == nil {
+		fmt.Println("This marble already exists - " + id)
+		fmt.Println(marble)
+		return shim.Error("This marble already exists - " + id) //all stop a marble by this id exists
+	}
+
+	//build the marble json string manually
+	///共计写20个data属性值，改写color和size
+	str := `{
+		"docType":"marble", 
+		"id": "` + id + `", 
+		"owner": {
+			"id": "` + owner_id + `", 
+			"username": "` + owner.Username + `", 
+			"company": "` + owner.Company + `"
+		},
+		"data1": "` + data1 + `", 
+		"data2": "` + data2 + `", 
+		"data3": "` + data3 + `",
+		"data4": "` + data4 + `",
+		"data5": "` + data5 + `",
+		"data6": "` + data6 + `",
+		"data7": "` + data7 + `",
+		"data8": "` + data8 + `",
+		"data9": "` + data9 + `",
+		"data10": "` + data10 + `",
+		"data11": "` + data11 + `",
+		"data12": "` + data12 + `",
+		"data13": "` + data13 + `",
+	}`
+	err = stub.PutState(id, []byte(str)) //store marble with id as key
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+
+	fmt.Println("- end init_cert")
 	return shim.Success(nil)
 }
 
@@ -362,15 +473,139 @@ func update_marbleInfo(stub shim.ChaincodeStubInterface, args []string) pb.Respo
 
 	// transfer the marble
 	res := `{
+		"docType":"marble",
+		"id": "` + id + `",
+		"color": "` + color + `",
+		"size": ` + strconv.Itoa(size) + `,
+		"owner": {
+			"id": "` + owner_id + `",
+			"username": "` + owner.Username + `",
+			"company": "` + owner.Company + `"
+		}
+	}`
+
+	err = stub.PutState(args[0], []byte(res)) //rewrite the marble with id as key
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+
+	fmt.Println("- end set marbleInfo")
+	return shim.Success(nil)
+
+}
+
+// ============================================================================================================================
+// dubaohao -----update info on cert
+//
+// Shows off GetState() and PutState()
+//
+// Inputs - Array of Strings
+//       0     ,        1      ,        2                      ,  3   ,  4
+//  marble id  ,  owner id  , company that auth the transfer, color,size
+// "m999999999", "o99999999999", united_mables"                ,"red" ,large
+// ============================================================================================================================
+func update_certInfo(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+	var err error
+	fmt.Println("starting updates_marbleInfo")
+
+	// this is quirky
+	// todo - get the "company that authed the transfer" from the certificate instead of an argument
+	// should be possible since we can now add attributes to the enrollment cert
+	// as is.. this is a bit broken (security wise), but it's much much easier to demo! holding off for demos sake
+
+	// if len(args) != 6 {
+	// 	return shim.Error("Incorrect number of arguments. Expecting 6")
+	// }
+
+	// input sanitation
+	err = sanitize_arguments(args)
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+
+	id := args[0]
+	color := strings.ToLower(args[1])
+	size, err := strconv.Atoi(args[2])
+	owner_id := args[3]
+	authed_by_company := args[4]
+
+	data1 := args[3] //data1
+	data2 := args[4]
+	data3 := args[5]
+	data4 := args[6]
+	data5 := args[7]
+
+	data6 := args[8]
+	data7 := args[9]
+	data8 := args[10]
+	data9 := args[11]
+	data10 := args[12]
+
+	data11 := args[13]
+	data12 := args[14]
+	data13 := args[15]
+	data14 := args[16]
+	data15 := args[17]
+
+	data16 := args[18]
+	data17 := args[19]
+	data18 := args[20]
+	data19 := args[21]
+	data20 := args[22] //data20
+
+	fmt.Println(id + "->" + id + " - |" + authed_by_company)
+
+	// check if user already exists
+	owner, err := get_owner(stub, owner_id)
+	if err != nil {
+		return shim.Error("This owner does not exist - " + owner_id)
+	}
+
+	// // get marble's current state
+	//marbleAsBytes, err := stub.GetState(id)
+	// if err != nil {
+	// 	return shim.Error("Failed to get marble")
+	// }
+	// res := Marble{}
+	// json.Unmarshal(marbleAsBytes, &res) //un stringify it aka JSON.parse()
+
+	// // check authorizing company
+	// if res.Owner.Company != authed_by_company {
+	// 	return shim.Error("The company '" + authed_by_company + "' cannot authorize transfers for '" + res.Owner.Company + "'.")
+	// }
+
+	// transfer the marble
+	///共计写20个data属性值，改写color和size
+	res := `{
 		"docType":"marble", 
-		"id": "` + id + `", 
-		"color": "` + color + `", 
-		"size": ` + strconv.Itoa(size) + `, 
+		"id": "` + id + `",  
+		"color": "` + color + `",
+		"size": ` + strconv.Itoa(size) + `,
 		"owner": {
 			"id": "` + owner_id + `", 
 			"username": "` + owner.Username + `", 
 			"company": "` + owner.Company + `"
-		}
+		},
+		"data1": "` + data1 + `", 
+		"data2": "` + data2 + `", 
+		"data3": "` + data3 + `",
+		"data4": "` + data4 + `",
+		"data5": "` + data5 + `",
+		"data6": "` + data6 + `",
+		"data7": "` + data7 + `",
+		"data8": "` + data8 + `",
+		"data9": "` + data9 + `",
+		"data10": "` + data10 + `",
+		"data11": "` + data11 + `",
+		"data12": "` + data12 + `",
+		"data13": "` + data13 + `",
+		"data14": "` + data14 + `",
+		"data15": "` + data15 + `",
+		"data16": "` + data16 + `",
+		"data17": "` + data17 + `",
+		"data18": "` + data18 + `",
+		"data19": "` + data19 + `",
+		"data20": "` + data20 + `",
 	}`
 
 	err = stub.PutState(args[0], []byte(res)) //rewrite the marble with id as key

@@ -87,6 +87,48 @@ module.exports = function (cp, fcw, logger) {
 			});
 		}
 
+		// dubaohao---------create a new cert
+		if (data.type === 'createCert') {
+			logger.info('[ws] create cert req');
+			// console.log("websocker server side",data);
+			options.args = {
+				data1: data.data1,
+				data2: data.data2,
+				data3: data.data3,
+				data4: data.data4,
+				data5: data.data5,
+
+				data6: data.data6,
+				data7: data.data7,
+				data8: data.data8,
+				data9: data.data9,
+				data10: data.data10,
+
+				data11: data.data11,
+				data12: data.data12,
+				data13: data.data13,
+				// data14: data.data14,
+				// data15: data.data15,
+
+				// data16: data.data16,
+				// data17: data.data17,
+				// data18: data.data18,
+				// data19: data.data19,
+				// data20: data.data20,
+
+				marble_owner: data.username,
+				owners_company: data.company,
+				owner_id: data.owner_id,
+				auth_company: process.env.marble_company,
+				
+			};
+
+			marbles_lib.create_a_cert(options, function (err, resp) {
+				if (err != null) send_err(err, data);
+				else options.ws.send(JSON.stringify({ msg: 'tx_step', state: 'finished' }));
+			});
+		}
+
 		// transfer a marble
 		else if (data.type === 'transfer_marble') {
 			console.log("transfer进入server了！！！");
@@ -109,8 +151,29 @@ module.exports = function (cp, fcw, logger) {
 			logger.info('[ws] transferring req');
 			options.args = {
 				marble_id: data.id,
-				color:data.color,
-				size:data.size,
+				data1: data.data1,
+				data2: data.data2,
+				data3: data.data3,
+				data4: data.data4,
+				data5: data.data5,
+
+				data6: data.data6,
+				data7: data.data7,
+				data8: data.data8,
+				data9: data.data9,
+				data10: data.data10,
+
+				data11: data.data11,
+				data12: data.data12,
+				data13: data.data13,
+				// data14: data.data14,
+				// data15: data.data15,
+
+				// data16: data.data16,
+				// data17: data.data17,
+				// data18: data.data18,
+				// data19: data.data19,
+				// data20: data.data20,
 				owner_id: data.owner_id,
 				company: process.env.marble_company
 				
@@ -155,6 +218,7 @@ module.exports = function (cp, fcw, logger) {
 		// get all owners, marbles, & companies
 		else if (data.type === 'read_everything') {
 			logger.info('[ws] read everything req');
+			// console.log("杜保皓websocker_sever_side",data);
 			ws_server.check_for_updates(ws);
 		}
 
@@ -303,6 +367,7 @@ module.exports = function (cp, fcw, logger) {
 			}
 			else {
 				var data = resp.parsed;
+				// console.log("杜保皓websocket_server_side",data.marbles);
 				if (data && data.owners && data.marbles) {
 					console.log('');
 					logger.debug('[checking] number of owners:', data.owners.length);

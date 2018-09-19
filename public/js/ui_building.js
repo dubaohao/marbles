@@ -18,15 +18,17 @@ function build_marble(marble) {
 	marbles[marble.id] = marble;
 
 	marble.id = escapeHtml(marble.id);
-	marble.color = escapeHtml(marble.color);
-	marble.owner.id = escapeHtml(marble.owner.id);
+	// marble.color = escapeHtml(marble.color);
+	// marble.owner.id = escapeHtml(marble.owner.id);
 	marble.owner.username = escapeHtml(marble.owner.username);
 	marble.owner.company = escapeHtml(marble.owner.company);
 	var full_owner = escapeHtml(marble.owner.username.toLowerCase() + '.' + marble.owner.company);
 
-	console.log('[ui] building marble: ', marble.color, full_owner, marble.id.substring(0, 4) + '...');
-	if (marble.size == 16) size = 'smallMarble';
-	if (marble.color) colorClass = marble.color.toLowerCase() + 'bg';
+	// console.log('[ui] building marble: ', marble.color, full_owner, marble.id.substring(0, 4) + '...');
+	// if (marble.size == 16) size = 'smallMarble';
+	// if (marble.color) colorClass = marble.color.toLowerCase() + 'bg';
+	// size = "largeMarble";
+	// colorClass = 'greenbg';
 
 	if (auditingMarble && marble.id === auditingMarble.id) auditing = 'auditingMarble';
 
@@ -63,6 +65,7 @@ function size_user_name(name) {
 
 //build all user panels
 function build_user_panels(data) {
+	console.log("杜保皓dududududuud",data);
 
 	//reset
 	console.log('[ui] clearing all user panels');
@@ -123,7 +126,7 @@ function build_user_panels(data) {
 					};
 					ws.send(JSON.stringify(obj));
 					$(ui.draggable).addClass('invalid bounce');
-					refreshHomePanel();
+					b ();
 				});
 			}
 
@@ -196,10 +199,42 @@ function build_a_tx(data, pos) {
 	var username = '-';
 	var company = '-';
 	var id = '-';
+	var data1 ='-';
+	var data2 ='-';
+	var data3 ='-';
+	var data4 ='-';
+	var data5 ='-';
+	var data6 ='-';
+	var data7 ='-';
+	var data8 ='-';
+	var data9 ='-';
+	var data10 ='-';
+	var data11 ='-';
+	var data12 ='-';
+	var data13 ='-';
+	// var data ='-';
+	// var data ='-';
+	// var data ='-';
+	// var data ='-';
 	if (data && data.value && data.value.owner && data.value.owner.username) {
 		username = data.value.owner.username;
 		company = data.value.owner.company;
 		id = data.value.owner.id;
+		data1=data.value.data1;
+		data2=data.value.data2;
+		data3=data.value.data3;
+		data4=data.value.data4;
+		data5=data.value.data5;
+		data6=data.value.data6;
+		data7=data.value.data7;
+		data8=data.value.data8;
+		data9=data.value.data9;
+		data10=data.value.data10;
+		data11=data.value.data11;
+		data12=data.value.data12;
+		data13=data.value.data13;
+		// data=data.value.data;
+		// data=data.value.data;
 	}
 
 	// html += `<div class="txDetails">
@@ -303,52 +338,52 @@ function build_a_tx(data, pos) {
 				<table>
 					<tr>
 	 					<td width="70"  height="35" align=center>姓名</td>
-	 					<td colspan="3=" ></td>
+	 					<td colspan="3=" >`+data1+`</td>
 	 
 	 					
 	 				</tr>
 	 
 	 				<tr>
 	 					<td width="70"  height="35" align=center>性别</td>
-	 					<td width="150"></td>
+	 					<td width="150">`+data2+`</td>
 	 					<td width="70"  height="35" align=center>出生日期</td>
-	 					<td width="150"></td>
+	 					<td width="150">`+data3+`</td>
 	 
 	 				</tr>
 	 
 	 				<tr>
 	 					<td width="70"  height="35" align=center>入学时间</td>
-	 					<td width="150"></td>
+	 					<td width="150">`+data4+`</td>
 	 					<td width="70"  height="35" align=center>毕业时间</td>
-	 					<td width="150"></td>
+	 					<td width="150">`+data5+`</td>
 	 				</tr>
 	 
 	 				<tr>
 	 					<td width="70"  height="35" align=center>学历类型</td>
-	 					<td width="150"></td>
+	 					<td width="150">`+data6+`</td>
 	 					<td width="70"  height="35" align=center>学历层次</td>
-	 					<td width="150"></td>	
+	 					<td width="150">`+data7+`</td>	
 	 				</tr>
 	 
 	 				<tr>
 	 					<td width="70"  height="35" align=center>毕业院校</td>
-	 					<td width="150"></td>
+	 					<td width="150">`+data8+`</td>
 	 					<td width="80"  height="35" align=center>院校所在地</td>
-	 					<td colspan="2=" width="150"></td>	 
+	 					<td colspan="2=" width="150">`+data9+`</td>	 
 	 				</tr>
 	 
 	 				<tr>
 	 					<td width="70"  height="35" align=center>专业名称</td>
-	 					<td width="150"></td>
+	 					<td width="150">`+data10+`</td>
 	 					<td width="80"  height="35" align=center>学习形式</td>
-	 					<td colspan="2=" width="150"></td>	 
+	 					<td colspan="2=" width="150">`+data11+`</td>	 
 			 		</tr>
 	 
 	 				<tr>
 	 					<td width="70"  height="35" align=center>毕结业结论</td>
-	 					<td width="150"></td>
+	 					<td width="150">`+data12+`</td>
 	 					<td width="80"  height="35" align=center>证书编号</td>
-	 					<td colspan="2=" width="150"></td>	 
+	 					<td colspan="2=" width="150">`+data13+`</td>	 
 	 				</tr>
 	 
 					 <tr>

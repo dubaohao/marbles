@@ -4,7 +4,7 @@
 /* exported record_company, autoCloseNoticePanel, start_up, block_ui_delay*/
 ///弹珠修改为证书，若使用弹珠，需要修改注释掉的行数，选择其一（248,249）（399,400）
 var ws = {};
-var bgcolors = ['whitebg', 'blackbg', 'redbg', 'greenbg', 'bluebg', 'purplebg', 'pinkbg', 'orangebg', 'yellowbg'];
+// var bgcolors = ['whitebg', 'blackbg', 'redbg', 'greenbg', 'bluebg', 'purplebg', 'pinkbg', 'orangebg', 'yellowbg'];
 var autoCloseNoticePanel = null;
 var known_companies = {};
 var start_up = true;
@@ -94,48 +94,89 @@ $(document).on('ready', function () {
 
 //dubaohao-----------新增和更新证书---------------------------------------------------------------------
 $('#createCertButton').click(function () {
-	console.log('creating marble');
+	console.log('creating cert');
 	var obj = {
-		type: 'create',
-		color: $('.colorSelected').attr('color'),
-		size: $('select[name="size"]').val(),
+		type: 'createCert',
+		data1: $('input[name="1"]').val(),
+		data2: $('input[name="2"]').val(),
+		data3: $('input[name="3"]').val(),
+		data4: $('input[name="4"]').val(),
+		data5: $('input[name="5"]').val(),
+
+		data6: $('input[name="6"]').val(),
+		data7: $('input[name="7"]').val(),
+		data8: $('input[name="8"]').val(),
+		data9: $('input[name="9"]').val(),
+		data10: $('input[name="10"]').val(),
+
+		data11: $('input[name="11"]').val(),
+		data12: $('input[name="12"]').val(),
+		data13: $('input[name="13"]').val(),
+		// data14: $('input[name="14"]').val(),
+		// data15: $('input[name="15"]').val(),
+
+		// data16: $('input[name="16"]').val(),
+		// data17: $('input[name="17"]').val(),
+		// data18: $('input[name="18"]').val(),
+		// data19: $('input[name="19"]').val(),
+		// data20: $('input[name="20"]').val(),
 		username: $('select[name="user"]').val(),
 		company: $('input[name="company"]').val(),
 		owner_id: $('input[name="owner_id"]').val(),
 		v: 1
 	};
-	console.log('creating marble, sending', obj)
+	console.log('creating cert, sending', obj)
 	$('#createCertificates').fadeOut();
-
 	$('#tint').fadeOut();
 
 	show_tx_step({ state: 'building_proposal' }, function () {
 		ws.send(JSON.stringify(obj));
 
 		refreshHomePanel();
-		$('.colorValue').html('Color');											//reset
-		for (var i in bgcolors) $('.createball').removeClass(bgcolors[i]);		//reset
-		$('.createball').css('border', '2px dashed #fff');						//reset
+		// $('.colorValue').html('Color');											//reset
+		// for (var i in bgcolors) $('.createball').removeClass(bgcolors[i]);		//reset
+		// $('.createball').css('border', '2px dashed #fff');						//reset
 	});
 
 	return false;
 });
-
+//更新证书
 $('#updateCertButton').click(function () {
 	console.log('update marbleInfo');
 	var obj = {
-		type: 'update_marbleInfo',
-		color: $('.colorSelected').attr('color'),
-		size: $('select[name="size"]').val(),
+		type: 'update_certInfo',
 		username: $('select[name="user"]').val(),
 		company: $('input[name="company"]').val(),
 		owner_id: $('input[name="owner_id"]').val(),
+		data1: $('input[name="1"]').val(),
+		data2: $('input[name="2"]').val(),
+		data3: $('input[name="3"]').val(),
+		data4: $('input[name="4"]').val(),
+		data5: $('input[name="5"]').val(),
+
+		data6: $('input[name="6"]').val(),
+		data7: $('input[name="7"]').val(),
+		data8: $('input[name="8"]').val(),
+		data9: $('input[name="9"]').val(),
+		data10: $('input[name="10"]').val(),
+
+		data11: $('input[name="11"]').val(),
+		data12: $('input[name="12"]').val(),
+		data13: $('input[name="13"]').val(),
+		// data14: $('input[name="14"]').val(),
+		// data15: $('input[name="15"]').val(),
+
+		// data16: $('input[name="16"]').val(),
+		// data17: $('input[name="17"]').val(),
+		// data18: $('input[name="18"]').val(),
+		// data19: $('input[name="19"]').val(),
+		// data20: $('input[name="20"]').val(),
 		v: 1
 	};
 	// console.log(marbleId);
 	console.log(auditingMarble.id);
 	console.log('update marbleInfo, sending',obj);
-	update_marbleInfo(auditingMarble.id,obj.color,obj.size,obj.owner_id);
+	update_certInfo(auditingMarble.id,obj);
 	$('#updateCertificates').fadeOut();
 	$('#tint').fadeOut();
 		refreshHomePanel();
@@ -434,11 +475,11 @@ $('#updateCertButton').click(function () {
 			$(that).addClass('auditingMarble');
 			$('#auditContentWrap').fadeIn();
 			$('#marbleId').html(marble_id);
-			$('#ImgPath').html('"/imgs/person.jpg"');//////弹珠换成人物头像照片
+			$('#ImgPath').html('"/imgs/2.jpg"');//////弹珠换成人物头像照片
 			var color = marbles[marble_id].color;
 			// console.log('!!!!!!!!',color)
-			for (var i in bgcolors) $('.auditMarble').removeClass(bgcolors[i]);	//reset
-			$('.auditMarble').addClass(color.toLowerCase() + 'bg');
+			// for (var i in bgcolors) $('.auditMarble').removeClass(bgcolors[i]);	//reset
+			// $('.auditMarble').addClass(color.toLowerCase() + 'bg');
 
 			$('#rightEverything').addClass('rightEverythingOpened');
 			$('#leftEverything').fadeIn();

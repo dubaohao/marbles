@@ -58,6 +58,7 @@ function connect_to_server() {
 	function onMessage(msg) {
 		try {
 			var msgObj = JSON.parse(msg.data);
+			// console.log("杜保皓websocket",msgObj);
 
 			//marbles
 			if (msgObj.msg === 'everything') {
@@ -69,6 +70,7 @@ function connect_to_server() {
 				build_user_panels(msgObj.everything.owners);
 				for (var i in msgObj.everything.marbles) {
 					populate_users_marbles(msgObj.everything.marbles[i]);
+					// console.log("杜保皓websocket",msgObj.everything.marbles[i]);
 				}
 
 				start_up = false;
@@ -240,21 +242,45 @@ function update_marbleInfo(marbleId,color,size,owner_id) {
 		refreshHomePanel();
 	});
 }
-
-//transfer_marble selected ball to user
-function update_marbleInfo2(marbleId, to_owner_id,color,size) {
+//dubaohao---------update certInfo
+function update_certInfo(marbleId,data) {
 	show_tx_step({ state: 'building_proposal' }, function () {
 		var obj = {
-			type: 'transfer_marble',
+			type: 'update_certInfo',
 			id: marbleId,
-			owner_id: to_owner_id,
+			owner_id: data.owner_id,
+			data1: data.data1,
+			data2: data.data2,
+			data3: data.data3,
+			data4: data.data4,
+			data5: data.data5,
+
+			data6: data.data6,
+			data7: data.data7,
+			data8: data.data8,
+			data9: data.data9,
+			data10: data.data10,
+
+			data11: data.data11,
+			data12: data.data12,
+			data13: data.data13,
+			// data14: data.data14,
+			// data15: data.data15,
+
+			// data16: data.data16,
+			// data17: data.data17,
+			// data18: data.data18,
+			// data19: data.data19,
+			// data20: data.data20,
 			v: 1
 		};
-		console.log(wsTxt + ' sending transfer marble msg', obj);
+		console.log(wsTxt + ' sending update cert', obj);
 		ws.send(JSON.stringify(obj));
 		refreshHomePanel();
 	});
 }
+
+// ----------------------------------------
 
 //record the compan, show notice if its new
 function record_company(company) {

@@ -215,7 +215,10 @@ $auditSize: 333px;
 	border:2px transparent solid;
 	padding:0;
 	vertical-align: bottom;
-	border-radius: 1000px;
+	// border-radius: 1000px;
+	background:url(../imgs/xlbg-sample.png);
+	background-size: cover;
+	// background: #000;
 }
 .ball:hover{
 	cursor: pointer;
