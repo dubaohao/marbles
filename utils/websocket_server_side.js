@@ -218,7 +218,7 @@ module.exports = function (cp, fcw, logger) {
 		// get all owners, marbles, & companies
 		else if (data.type === 'read_everything') {
 			logger.info('[ws] read everything req');
-			// console.log("杜保皓websocker_sever_side",data);
+			// console.log("杜保皓websocker_sever_side_read_everything",data);
 			ws_server.check_for_updates(ws);
 		}
 
@@ -367,7 +367,7 @@ module.exports = function (cp, fcw, logger) {
 			}
 			else {
 				var data = resp.parsed;
-				// console.log("杜保皓websocket_server_side",data.marbles);
+				console.log("杜保皓websocket_server_side_read_everything",data.marbles);
 				if (data && data.owners && data.marbles) {
 					console.log('');
 					logger.debug('[checking] number of owners:', data.owners.length);
@@ -389,6 +389,7 @@ module.exports = function (cp, fcw, logger) {
 				else {															//detected new things, send it out
 					logger.debug('[checking] there are new things, sending to all clients');
 					known_everything = data;
+					//  console.log("杜保皓websocket_server_side",known_everything.marbles.amy.marbles);
 					wss.broadcast({ msg: 'everything', e: err, everything: data });	//sent to all clients
 				}
 				if (cb) cb();

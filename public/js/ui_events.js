@@ -4,7 +4,7 @@
 /* exported record_company, autoCloseNoticePanel, start_up, block_ui_delay*/
 ///弹珠修改为证书，若使用弹珠，需要修改注释掉的行数，选择其一（248,249）（399,400）
 var ws = {};
-// var bgcolors = ['whitebg', 'blackbg', 'redbg', 'greenbg', 'bluebg', 'purplebg', 'pinkbg', 'orangebg', 'yellowbg'];
+var bgcolors = ['whitebg', 'blackbg', 'redbg', 'greenbg', 'bluebg', 'purplebg', 'pinkbg', 'orangebg', 'yellowbg'];
 var autoCloseNoticePanel = null;
 var known_companies = {};
 var start_up = true;

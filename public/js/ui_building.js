@@ -18,15 +18,15 @@ function build_marble(marble) {
 	marbles[marble.id] = marble;
 
 	marble.id = escapeHtml(marble.id);
-	// marble.color = escapeHtml(marble.color);
-	// marble.owner.id = escapeHtml(marble.owner.id);
+	marble.color = escapeHtml(marble.color);
+	marble.owner.id = escapeHtml(marble.owner.id);
 	marble.owner.username = escapeHtml(marble.owner.username);
 	marble.owner.company = escapeHtml(marble.owner.company);
 	var full_owner = escapeHtml(marble.owner.username.toLowerCase() + '.' + marble.owner.company);
 
 	// console.log('[ui] building marble: ', marble.color, full_owner, marble.id.substring(0, 4) + '...');
-	// if (marble.size == 16) size = 'smallMarble';
-	// if (marble.color) colorClass = marble.color.toLowerCase() + 'bg';
+	if (marble.size == 16) size = 'smallMarble';
+	if (marble.color) colorClass = marble.color.toLowerCase() + 'bg';
 	// size = "largeMarble";
 	// colorClass = 'greenbg';
 
@@ -65,7 +65,7 @@ function size_user_name(name) {
 
 //build all user panels
 function build_user_panels(data) {
-	console.log("杜保皓dududududuud",data);
+	console.log("杜保皓building_data",data);
 
 	//reset
 	console.log('[ui] clearing all user panels');

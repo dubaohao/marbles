@@ -59,7 +59,7 @@ function connect_to_server() {
 		try {
 			var msgObj = JSON.parse(msg.data);
 			// console.log("杜保皓websocket",msgObj);
-
+			
 			//marbles
 			if (msgObj.msg === 'everything') {
 				console.log(wsTxt + ' rec', msgObj.msg, msgObj);
@@ -85,6 +85,7 @@ function connect_to_server() {
 			else if (msgObj.msg === 'users_marbles') {
 				console.log(wsTxt + ' rec', msgObj.msg, msgObj);
 				populate_users_marbles(msgObj);
+				console.log("杜保皓websocket",msgObj.everything.marbles[i]);
 			}
 
 			// block

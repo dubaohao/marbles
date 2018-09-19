@@ -42,26 +42,26 @@ type Marble struct {
 	// Color      string        `json:"color"`
 	// Size       int           `json:"size"` //size in mm of marble
 	Owner  OwnerRelation `json:"owner"`
-	data1  string        `json:"data1"`
-	data2  string        `json:"data2"`
-	data3  string        `json:"data3"`
-	data4  string        `json:"data4"`
-	data5  string        `json:"data5"`
-	data6  string        `json:"data6"`
-	data7  string        `json:"data7"`
-	data8  string        `json:"data8"`
-	data9  string        `json:"data9"`
-	data10 string        `json:"data10"`
-	data11 string        `json:"data11"`
-	data12 string        `json:"data12"`
-	data13 string        `json:"data13"`
-	// data14 string        `json:"data14"`
-	// data15 string        `json:"data15"`
-	// data16 string        `json:"data16"`
-	// data17 string        `json:"data17"`
-	// data18 string        `json:"data18"`
-	// data19 string        `json:"data19"`
-	// data20 string        `json:"data20"`
+	Data1  string        `json:"data1"`
+	Data2  string        `json:"data2"`
+	Data3  string        `json:"data3"`
+	Data4  string        `json:"data4"`
+	Data5  string        `json:"data5"`
+	Data6  string        `json:"data6"`
+	Data7  string        `json:"data7"`
+	Data8  string        `json:"data8"`
+	Data9  string        `json:"data9"`
+	Data10 string        `json:"data10"`
+	Data11 string        `json:"data11"`
+	Data12 string        `json:"data12"`
+	Data13 string        `json:"data13"`
+	// Data14 string        `json:"data14"`
+	// Data15 string        `json:"data15"`
+	// Data16 string        `json:"data16"`
+	// Data17 string        `json:"data17"`
+	// Data18 string        `json:"data18"`
+	// Data19 string        `json:"data19"`
+	// Data20 string        `json:"data20"`
 }
 
 // ----- Owners ----- //

@@ -127,9 +127,9 @@ func init_marble(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	var err error
 	fmt.Println("starting init_marble")
 
-	if len(args) != 5 {
-		return shim.Error("Incorrect number of arguments. Expecting 5")
-	}
+	// if len(args) != 5 {
+	// 	return shim.Error("Incorrect number of arguments. Expecting 5")
+	// }
 
 	//input sanitation
 	err = sanitize_arguments(args)
@@ -137,11 +137,32 @@ func init_marble(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 		return shim.Error(err.Error())
 	}
 
+	// id := args[0]
+	// color := strings.ToLower(args[1])
+	// size, err := strconv.Atoi(args[2])
+	// owner_id := args[3]
+	// authed_by_company := args[4]
 	id := args[0]
-	color := strings.ToLower(args[1])
-	size, err := strconv.Atoi(args[2])
-	owner_id := args[3]
-	authed_by_company := args[4]
+	// color := strings.ToLower(args[1])
+	// size, err := strconv.Atoi(args[2])
+	owner_id := args[1]
+	authed_by_company := args[2]
+
+	data1 := args[3] //data1
+	data2 := args[4]
+	data3 := args[5]
+	data4 := args[6]
+	data5 := args[7]
+
+	data6 := args[8]
+	data7 := args[9]
+	data8 := args[10]
+	data9 := args[11]
+	data10 := args[12]
+
+	data11 := args[13]
+	data12 := args[14]
+	data13 := args[15]
 	if err != nil {
 		return shim.Error("3rd argument must be a numeric string")
 	}
@@ -167,16 +188,38 @@ func init_marble(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	}
 
 	//build the marble json string manually
+	// str := `{
+	// 	"docType":"marble",
+	// 	"id": "` + id + `",
+	// 	"color": "` + color + `",
+	// 	"size": ` + strconv.Itoa(size) + `,
+	// 	"owner": {
+	// 		"id": "` + owner_id + `",
+	// 		"username": "` + owner.Username + `",
+	// 		"company": "` + owner.Company + `"
+	// 	}
+	// }`
 	str := `{
-		"docType":"marble",
-		"id": "` + id + `",
-		"color": "` + color + `",
-		"size": ` + strconv.Itoa(size) + `,
+		"docType":"marble", 
+		"id": "` + id + `", 
+		"data1": "` + data1 + `", 
+		"data2": "` + data2 + `", 
+		"data3": "` + data3 + `",
+		"data4": "` + data4 + `",
+		"data5": "` + data5 + `",
+		"data6": "` + data6 + `",
+		"data7": "` + data7 + `",
+		"data8": "` + data8 + `",
+		"data9": "` + data9 + `",
+		"data10": "` + data10 + `",
+		"data11": "` + data11 + `",
+		"data12": "` + data12 + `",
+		"data13": "` + data13 + `",
 		"owner": {
-			"id": "` + owner_id + `",
-			"username": "` + owner.Username + `",
+			"id": "` + owner_id + `", 
+			"username": "` + owner.Username + `", 
 			"company": "` + owner.Company + `"
-		}
+		}	
 	}`
 	err = stub.PutState(id, []byte(str)) //store marble with id as key
 	if err != nil {
@@ -188,7 +231,7 @@ func init_marble(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 }
 
 // ============================================================================================================================
-// Init Marble - create a new cert, store into chaincode state
+// Init Cert - create a new cert, store into chaincode state
 //
 // Shows off building a key's JSON value manually
 //
@@ -202,7 +245,8 @@ func init_cert(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	fmt.Println("starting init_cert")
 
 	// if len(args) != 5 {
-	// 	return shim.Error("Incorrect number of arguments. Expecting 5")
+	// 	// return shim.Error("Incorrect number of arguments. Expecting 5")
+	// 	return shim.Error("args")
 	// }
 
 	//input sanitation
@@ -270,11 +314,6 @@ func init_cert(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	str := `{
 		"docType":"marble", 
 		"id": "` + id + `", 
-		"owner": {
-			"id": "` + owner_id + `", 
-			"username": "` + owner.Username + `", 
-			"company": "` + owner.Company + `"
-		},
 		"data1": "` + data1 + `", 
 		"data2": "` + data2 + `", 
 		"data3": "` + data3 + `",
@@ -288,6 +327,11 @@ func init_cert(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 		"data11": "` + data11 + `",
 		"data12": "` + data12 + `",
 		"data13": "` + data13 + `",
+		"owner": {
+			"id": "` + owner_id + `", 
+			"username": "` + owner.Username + `", 
+			"company": "` + owner.Company + `"
+		}	
 	}`
 	err = stub.PutState(id, []byte(str)) //store marble with id as key
 	if err != nil {

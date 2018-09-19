@@ -128,6 +128,7 @@ module.exports = function (enrollObj, g_options, fcw, logger) {
 				options.args.auth_company
 			],
 		};
+		// console.log("杜保皓cc_lib_init_marble",opts);
 		fcw.invoke_chaincode(enrollObj, opts, function (err, resp) {
 			if (cb) {
 				if (!resp) resp = {};
@@ -183,7 +184,7 @@ module.exports = function (enrollObj, g_options, fcw, logger) {
 
 			],
 		};
-		// console.log("杜保皓cc_lib",opts);
+		// console.log("杜保皓cc_lib_init_cert",opts);
 		fcw.invoke_chaincode(enrollObj, opts, function (err, resp) {
 			if (cb) {
 				if (!resp) resp = {};
@@ -366,6 +367,7 @@ marbles_chaincode.update_marble_Info = function (options, cb) {
 		};
 		// console.log("杜保皓git_history",opts);
 		fcw.query_chaincode(enrollObj, opts, cb);
+		// console.log("杜保皓git_history",enrollObj);
 	};
 
 	//get multiple marbles/owners by start and stop ids
@@ -384,7 +386,7 @@ marbles_chaincode.update_marble_Info = function (options, cb) {
 			cc_function: 'getMarblesByRange',
 			cc_args: [options.args.start_id, options.args.stop_id]
 		};
-		// console.log("杜保皓get_multiple_keys",opts);
+		console.log("杜保皓cc_lib_get_multiple_keys",opts);
 		fcw.query_chaincode(enrollObj, opts, cb);
 	};
 
