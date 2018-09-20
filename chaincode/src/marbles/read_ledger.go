@@ -37,7 +37,7 @@ import (
 //  0
 //  key
 //  "abc"
-// 
+//
 // Returns - string
 // ============================================================================================================================
 func read(stub shim.ChaincodeStubInterface, args []string) pb.Response {
@@ -56,14 +56,14 @@ func read(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	}
 
 	key = args[0]
-	valAsbytes, err := stub.GetState(key)           //get the var from ledger
+	valAsbytes, err := stub.GetState(key) //get the var from ledger
 	if err != nil {
 		jsonResp = "{\"Error\":\"Failed to get state for " + key + "\"}"
 		return shim.Error(jsonResp)
 	}
 
 	fmt.Println("- end read")
-	return shim.Success(valAsbytes)                  //send it onward
+	return shim.Success(valAsbytes) //send it onward
 }
 
 // ============================================================================================================================
@@ -92,8 +92,8 @@ func read(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 // ============================================================================================================================
 func read_everything(stub shim.ChaincodeStubInterface) pb.Response {
 	type Everything struct {
-		Owners   []Owner   `json:"owners"`
-		Marbles  []Marble  `json:"marbles"`
+		Owners  []Owner  `json:"owners"`
+		Marbles []Marble `json:"marbles"`
 	}
 	var everything Everything
 
@@ -103,7 +103,7 @@ func read_everything(stub shim.ChaincodeStubInterface) pb.Response {
 		return shim.Error(err.Error())
 	}
 	defer resultsIterator.Close()
-	
+
 	for resultsIterator.HasNext() {
 		aKeyValue, err := resultsIterator.Next()
 		if err != nil {
@@ -113,8 +113,8 @@ func read_everything(stub shim.ChaincodeStubInterface) pb.Response {
 		queryValAsBytes := aKeyValue.Value
 		fmt.Println("on marble id - ", queryKeyAsStr)
 		var marble Marble
-		json.Unmarshal(queryValAsBytes, &marble)                  //un stringify it aka JSON.parse()
-		everything.Marbles = append(everything.Marbles, marble)   //add this marble to the list
+		json.Unmarshal(queryValAsBytes, &marble)                //un stringify it aka JSON.parse()
+		everything.Marbles = append(everything.Marbles, marble) //add this marble to the list
 	}
 	fmt.Println("marble array - ", everything.Marbles)
 
@@ -134,16 +134,16 @@ func read_everything(stub shim.ChaincodeStubInterface) pb.Response {
 		queryValAsBytes := aKeyValue.Value
 		fmt.Println("on owner id - ", queryKeyAsStr)
 		var owner Owner
-		json.Unmarshal(queryValAsBytes, &owner)                   //un stringify it aka JSON.parse()
+		json.Unmarshal(queryValAsBytes, &owner) //un stringify it aka JSON.parse()
 
-		if owner.Enabled {                                        //only return enabled owners
-			everything.Owners = append(everything.Owners, owner)  //add this marble to the list
+		if owner.Enabled { //only return enabled owners
+			everything.Owners = append(everything.Owners, owner) //add this marble to the list
 		}
 	}
 	fmt.Println("owner array - ", everything.Owners)
 
 	//change to array of bytes
-	everythingAsBytes, _ := json.Marshal(everything)              //convert to array of bytes
+	everythingAsBytes, _ := json.Marshal(everything) //convert to array of bytes
 	return shim.Success(everythingAsBytes)
 }
 
@@ -159,10 +159,10 @@ func read_everything(stub shim.ChaincodeStubInterface) pb.Response {
 // ============================================================================================================================
 func getHistory(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	type AuditHistory struct {
-		TxId    string   `json:"txId"`
-		Value   Marble   `json:"value"`
+		TxId  string `json:"txId"`
+		Value Marble `json:"value"`
 	}
-	var history []AuditHistory;
+	var history []AuditHistory
 	var marble Marble
 
 	if len(args) != 1 {
@@ -186,21 +186,21 @@ func getHistory(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 		}
 
 		var tx AuditHistory
-		tx.TxId = historyData.TxId                     //copy transaction id over
-		json.Unmarshal(historyData.Value, &marble)     //un stringify it aka JSON.parse()
-		if historyData.Value == nil {                  //marble has been deleted
+		tx.TxId = historyData.TxId                 //copy transaction id over
+		json.Unmarshal(historyData.Value, &marble) //un stringify it aka JSON.parse()
+		if historyData.Value == nil {              //marble has been deleted
 			var emptyMarble Marble
-			tx.Value = emptyMarble                 //copy nil marble
+			tx.Value = emptyMarble //copy nil marble
 		} else {
 			json.Unmarshal(historyData.Value, &marble) //un stringify it aka JSON.parse()
-			tx.Value = marble                      //copy marble over
+			tx.Value = marble                          //copy marble over
 		}
-		history = append(history, tx)              //add this tx to the list
+		history = append(history, tx) //add this tx to the list
 	}
 	fmt.Printf("- getHistoryForMarble returning:\n%s", history)
 
 	//change to array of bytes
-	historyAsBytes, _ := json.Marshal(history)     //convert to array of bytes
+	historyAsBytes, _ := json.Marshal(history) //convert to array of bytes
 	return shim.Success(historyAsBytes)
 }
 

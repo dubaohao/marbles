@@ -256,7 +256,7 @@ module.exports = function (enrollObj, g_options, fcw, logger) {
 		marbles_chaincode.update_marble_Info = function (options, cb) {
 			console.log('');
 			console.log('2update进入marbles_lib文件了!!');
-			logger.info('updatting marble owner...');
+			logger.info('updatting marble info...');
 	
 			var opts = {
 				peer_urls: g_options.peer_urls,
@@ -281,10 +281,10 @@ module.exports = function (enrollObj, g_options, fcw, logger) {
 		};
 
 //dubaohao ---------update cert
-marbles_chaincode.update_marble_Info = function (options, cb) {
+marbles_chaincode.update_cert_Info = function (options, cb) {
 	console.log('');
 	console.log('2update进入marbles_lib文件了!!');
-	logger.info('updatting marble owner...');
+	logger.info('updatting cert info...');
 
 	var opts = {
 		peer_urls: g_options.peer_urls,
@@ -295,11 +295,11 @@ marbles_chaincode.update_marble_Info = function (options, cb) {
 		event_urls: g_options.event_urls,
 		endorsed_hook: options.endorsed_hook,
 		ordered_hook: options.ordered_hook,
-		cc_function: 'update_marbleInfo',
+		cc_function: 'update_certInfo',
 		cc_args: [
 			options.args.marble_id,
 			options.args.owner_id,
-			options.args.auth_company,
+			options.args.company,
 			options.args.data1,
 			options.args.data2,
 			options.args.data3,
@@ -325,7 +325,7 @@ marbles_chaincode.update_marble_Info = function (options, cb) {
 			// options.args.data20,
 		],
 	};
-	//console.log('update_cert',enrollObj,cb);
+	console.log('cc_lib_update_cert',opts);
 	fcw.invoke_chaincode(enrollObj, opts, cb);
 };
 

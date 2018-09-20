@@ -148,7 +148,26 @@ module.exports = function (cp, fcw, logger) {
 //dubaohao----------- update a marble
 		else if (data.type === 'update_marbleInfo') {
 			console.log("update进入server了！！！");
-			logger.info('[ws] transferring req');
+			logger.info('[ws] updating req');
+			options.args = {
+				marble_id: data.id,
+				color:data.color,
+				size:data.size,
+				owner_id: data.owner_id,
+				company: process.env.marble_company
+				
+			};
+		
+			marbles_lib.update_marble_Info(options, function (err, resp) {
+				if (err != null) send_err(err, data);
+				else options.ws.send(JSON.stringify({ msg: 'tx_step', state: 'finished' }));
+			});
+		}
+
+//dubaohao----------- update a cert
+		else if (data.type === 'update_certInfo') {
+			console.log("update进入server了！！！");
+			logger.info('[ws] updating req');
 			options.args = {
 				marble_id: data.id,
 				data1: data.data1,
@@ -179,23 +198,7 @@ module.exports = function (cp, fcw, logger) {
 				
 			};
 		
-			marbles_lib.update_marble_Info(options, function (err, resp) {
-				if (err != null) send_err(err, data);
-				else options.ws.send(JSON.stringify({ msg: 'tx_step', state: 'finished' }));
-			});
-		}
-
-		// transfer a marble
-		else if (data.type === 'update_marbleInfo2') {
-			console.log("transfer进入server了！！！");
-			logger.info('[ws] transferring req');
-			options.args = {
-				marble_id: data.id,
-				owner_id: data.owner_id,
-				auth_company: data.marble_company
-			};
-
-			marbles_lib.set_marble_owner(options, function (err, resp) {
+			marbles_lib.update_cert_Info(options, function (err, resp) {
 				if (err != null) send_err(err, data);
 				else options.ws.send(JSON.stringify({ msg: 'tx_step', state: 'finished' }));
 			});

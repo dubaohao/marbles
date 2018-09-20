@@ -588,14 +588,14 @@ func update_certInfo(stub shim.ChaincodeStubInterface, args []string) pb.Respons
 	data11 := args[13]
 	data12 := args[14]
 	data13 := args[15]
-	data14 := args[16]
-	data15 := args[17]
+	// data14 := args[16]
+	// data15 := args[17]
 
-	data16 := args[18]
-	data17 := args[19]
-	data18 := args[20]
-	data19 := args[21]
-	data20 := args[22] //data20
+	// data16 := args[18]
+	// data17 := args[19]
+	// data18 := args[20]
+	// data19 := args[21]
+	// data20 := args[22] //data20
 
 	fmt.Println(id + "->" + id + " - |" + authed_by_company)
 
@@ -643,13 +643,6 @@ func update_certInfo(stub shim.ChaincodeStubInterface, args []string) pb.Respons
 		"data11": "` + data11 + `",
 		"data12": "` + data12 + `",
 		"data13": "` + data13 + `",
-		"data14": "` + data14 + `",
-		"data15": "` + data15 + `",
-		"data16": "` + data16 + `",
-		"data17": "` + data17 + `",
-		"data18": "` + data18 + `",
-		"data19": "` + data19 + `",
-		"data20": "` + data20 + `",
 	}`
 
 	err = stub.PutState(args[0], []byte(res)) //rewrite the marble with id as key

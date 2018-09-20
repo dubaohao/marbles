@@ -145,8 +145,8 @@ $('#updateCertButton').click(function () {
 	console.log('update marbleInfo');
 	var obj = {
 		type: 'update_certInfo',
-		username: $('select[name="user"]').val(),
-		company: $('input[name="company"]').val(),
+		// username: $('select[name="user"]').val(),
+		// company: $('input[name="company"]').val(),
 		owner_id: $('input[name="owner_id"]').val(),
 		data1: $('input[name="1"]').val(),
 		data2: $('input[name="2"]').val(),
@@ -175,7 +175,7 @@ $('#updateCertButton').click(function () {
 	};
 	// console.log(marbleId);
 	console.log(auditingMarble.id);
-	console.log('update marbleInfo, sending',obj);
+	console.log('update certInfo, sending',obj);
 	update_certInfo(auditingMarble.id,obj);
 	$('#updateCertificates').fadeOut();
 	$('#tint').fadeOut();
@@ -549,8 +549,8 @@ $('#updateCertButton').click(function () {
 			// $('#createPanel').fadeIn();
 			$('#updateCertificates').fadeIn();
 			//初始化ball的颜色，大小
-			var color = marbles[marbleID].color;
-			var size = marbles[marbleID].size;
+			// var color = marbles[marbleID].color;
+			// var size = marbles[marbleID].size;
 			console.log('id',marbleID,'color:',color,'size:',size);
 			//ball的颜色和表单填写
 				var html = '<span class="fa fa-circle colorSelected ' + color + '" color="' + color + '"></span>';
