@@ -148,21 +148,21 @@ $('#updateCertButton').click(function () {
 		// username: $('select[name="user"]').val(),
 		// company: $('input[name="company"]').val(),
 		owner_id: $('input[name="owner_id"]').val(),
-		data1: $('input[name="1"]').val(),
-		data2: $('input[name="2"]').val(),
-		data3: $('input[name="3"]').val(),
-		data4: $('input[name="4"]').val(),
-		data5: $('input[name="5"]').val(),
+		data1: $('input[name="01"]').val(),
+		data2: $('input[name="02"]').val(),
+		data3: $('input[name="03"]').val(),
+		data4: $('input[name="04"]').val(),
+		data5: $('input[name="05"]').val(),
 
-		data6: $('input[name="6"]').val(),
-		data7: $('input[name="7"]').val(),
-		data8: $('input[name="8"]').val(),
-		data9: $('input[name="9"]').val(),
-		data10: $('input[name="10"]').val(),
+		data6: $('input[name="06"]').val(),
+		data7: $('input[name="07"]').val(),
+		data8: $('input[name="08"]').val(),
+		data9: $('input[name="09"]').val(),
+		data10: $('input[name="010"]').val(),
 
-		data11: $('input[name="11"]').val(),
-		data12: $('input[name="12"]').val(),
-		data13: $('input[name="13"]').val(),
+		data11: $('input[name="011"]').val(),
+		data12: $('input[name="012"]').val(),
+		data13: $('input[name="013"]').val(),
 		// data14: $('input[name="14"]').val(),
 		// data15: $('input[name="15"]').val(),
 
@@ -542,6 +542,7 @@ $('#updateCertButton').click(function () {
 		var marble_id = $(that).attr('id');
 		marbleID=marble_id;
 		// console.log('[marble_id]',marble_id);
+		// console.log('marble_info',marbles[marbleID]);
 		$('.updateMarble').click(function(){
 			 //console.log('dubaohao',$(this).attr('color'));
 			//left click audits marble
@@ -551,24 +552,50 @@ $('#updateCertButton').click(function () {
 			//初始化ball的颜色，大小
 			// var color = marbles[marbleID].color;
 			// var size = marbles[marbleID].size;
-			console.log('id',marbleID,'color:',color,'size:',size);
+			// console.log('id',marbleID,'color:',color,'size:',size);
 			//ball的颜色和表单填写
-				var html = '<span class="fa fa-circle colorSelected ' + color + '" color="' + color + '"></span>';
-				$('.colorValue').html(html);
-				for (var i in bgcolors) $('.createball').removeClass(bgcolors[i]);		//remove prev color
-					$('.createball').css('border', '0').addClass(color + 'bg');				//set new color
+				// var html = '<span class="fa fa-circle colorSelected ' + color + '" color="' + color + '"></span>';
+				// $('.colorValue').html(html);
+				// for (var i in bgcolors) $('.createball').removeClass(bgcolors[i]);		//remove prev color
+				// 	$('.createball').css('border', '0').addClass(color + 'bg');				//set new color
 			//ball的大小 添加使ball的大小可以根据文本框里的值，不点击时自动同步
-			$('select[name="size"]').val(size);
-			//change size of marble
-			$('select[name="size"]').is(function () {
-				var size = $(this).val();
-				if (size === '16') $('.createball').animate({ 'height': 150, 'width': 150 }, { duration: 200 });
-				else $('.createball').animate({ 'height': 250, 'width': 250 }, { duration: 200 });
-			}); 
+			// $('select[name="size"]').val(size);
+			// //change size of marble
+			// $('select[name="size"]').is(function () {
+			// 	var size = $(this).val();
+			// 	if (size === '16') $('.createball').animate({ 'height': 150, 'width': 150 }, { duration: 200 });
+			// 	else $('.createball').animate({ 'height': 250, 'width': 250 }, { duration: 200 });
+			// }); 
+			var data1 =marbles[marbleID].data1;
+			var data2 =marbles[marbleID].data2;
+			var data3 =marbles[marbleID].data3;
+			var data4 =marbles[marbleID].data4;
+			var data5 =marbles[marbleID].data5;
+			var data6 =marbles[marbleID].data6;
+			var data7 =marbles[marbleID].data7;
+			var data8 =marbles[marbleID].data8;
+			var data9 =marbles[marbleID].data9;
+			var data10 =marbles[marbleID].data10;
+			var data11 =marbles[marbleID].data11;
+			var data12 =marbles[marbleID].data12;
+			var data13 =marbles[marbleID].data13;
 			var company = $(that).attr('company');
 			var username = $(that).attr('username');
 			var owner_id = $(that).attr('owner_id');
 			//$('select[name="size"]').val(size);
+			$('input[name="01"]').val(data1);
+			$('input[name="02"]').val(data2);
+			$('input[name="03"]').val(data3);
+			$('input[name="04"]').val(data4);
+			$('input[name="05"]').val(data5);
+			$('input[name="06"]').val(data6);
+			$('input[name="07"]').val(data7);
+			$('input[name="08"]').val(data8);
+			$('input[name="09"]').val(data9);
+			$('input[name="010"]').val(data10);
+			$('input[name="011"]').val(data11);
+			$('input[name="012"]').val(data12);
+			$('input[name="013"]').val(data13);
 			$('select[name="user"]').html('<option value="' + username + '">' + toTitleCase(username) + '</option>');
 			$('input[name="company"]').val(company);
 			$('input[name="owner_id"]').val(owner_id);

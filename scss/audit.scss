@@ -50,23 +50,30 @@ $left_width: 175px;
 	margin-top: 5px;
 	margin-bottom: 10px;
 }
-.cetrts{
-	position: relative;
+.auditcerts{
+	// position: relative;
+	// border-color:solid 2px red;
 	vertical-align: bottom;
-	font-size: 14px;
+	font-size: 10px;
 	display: inline-block;
-	margin-left: 30px;
-	left: 100%;
+	width:90%;
+	margin-left: 15px;
+	// align:center;
+	// left: 10px;
 	margin-top: 5px;
 	margin-bottom: 10px;
 	background-color:#ffecec;/*表格外背景颜色*/
 	font-family:arial,verdana,sans-serif;font-size:14px;
 	table{border:1px solid #666666;}/*table最外面的边框的颜色属性*/
-	th{border:0px solid; background-color:#999999; padding:4px;	}/*th距离边框的padding*/
+	th{border:0px solid; 
+	background-color:#999999; 
+	padding:4px;	}/*th距离边框的padding*/
 	.odd{background-color:#efefef;}/*浅灰色：这里覆盖了深一些的灰色*/
 	/*odd在tr里面，浅色覆盖深色，即odd覆盖tr，尽管odd在tr里面*/
-	tr{background-color:#cccccc;}/*比浅灰色深了点*/
-	td{color:#111111;/*字体颜色*/
+	// tr{background-color:#cccccc;}/*比浅灰色深了点*/
+	tr{background-color:$acc_color2;}
+	// td{color:#111111;/*字体颜色*/
+	td{color:#FFF;/*字体颜色*/
    padding:2px;/*字体距离边框的距离*/        		 
 }
 }

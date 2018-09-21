@@ -334,68 +334,91 @@ function build_a_tx(data, pos) {
 
 	// 		</div>`;
 
-	html+=`	<div>
-				<table>
+	html+=`	<div style="border:ridge 5px rgb(46, 185, 214);">
+			<div class="txDetails">
+				<div class="txCount">TX ` + (Number(pos) + 1) + `</div>
+				<p>
+					<div class="marbleLegend">Transaction: </div>
+					<div class="marbleName txId">` + data.txId.substring(0, 14) + `...</div>
+				</p>
+				<p>
+					<div class="marbleLegend">Timestamp: </div>
+					<div class="marbleName txId">` + data.timestamp + `</div>
+				</p>
+				<p>
+					<div class="marbleLegend">Owner: </div>
+					<div class="marbleName">` + username + `</div>
+				</p>
+				<p>
+					<div class="marbleLegend">Company: </div>
+					<div class="marbleName">` + company + `</div>
+				</p>
+				<p>
+					<div class="marbleLegend">Ower Id: </div>
+					<div class="marbleName">` + id + `</div>
+				</p>
+			</div>
+			
+			<div>
+				<table class="auditcerts">
 					<tr>
-	 					<td width="70"  height="35" align=center>姓名</td>
+	 					<td align=center>姓名</td>
 	 					<td colspan="3=" >`+data1+`</td>
 	 
 	 					
 	 				</tr>
 	 
 	 				<tr>
-	 					<td width="70"  height="35" align=center>性别</td>
-	 					<td width="150">`+data2+`</td>
-	 					<td width="70"  height="35" align=center>出生日期</td>
-	 					<td width="150">`+data3+`</td>
+	 					<td align=center>性别</td>
+	 					<td>`+data2+`</td>
+	 					<td align=center>出生日期</td>
+	 					<td>`+data3+`</td>
 	 
 	 				</tr>
 	 
 	 				<tr>
-	 					<td width="70"  height="35" align=center>入学时间</td>
-	 					<td width="150">`+data4+`</td>
-	 					<td width="70"  height="35" align=center>毕业时间</td>
-	 					<td width="150">`+data5+`</td>
+	 					<td align=center>入学时间</td>
+	 					<td>`+data4+`</td>
+	 					<td align=center>毕业时间</td>
+	 					<td>`+data5+`</td>
 	 				</tr>
 	 
 	 				<tr>
-	 					<td width="70"  height="35" align=center>学历类型</td>
-	 					<td width="150">`+data6+`</td>
-	 					<td width="70"  height="35" align=center>学历层次</td>
-	 					<td width="150">`+data7+`</td>	
+	 					<td align=center>学历类型</td>
+	 					<td>`+data6+`</td>
+	 					<td align=center>学历层次</td>
+	 					<td>`+data7+`</td>	
 	 				</tr>
 	 
 	 				<tr>
-	 					<td width="70"  height="35" align=center>毕业院校</td>
-	 					<td width="150">`+data8+`</td>
-	 					<td width="80"  height="35" align=center>院校所在地</td>
-	 					<td colspan="2=" width="150">`+data9+`</td>	 
+	 					<td align=center>毕业院校</td>
+	 					<td>`+data8+`</td>
+	 					<td align=center>院校所在地</td>
+	 					<td colspan="2">`+data9+`</td>	 
 	 				</tr>
 	 
 	 				<tr>
-	 					<td width="70"  height="35" align=center>专业名称</td>
-	 					<td width="150">`+data10+`</td>
-	 					<td width="80"  height="35" align=center>学习形式</td>
-	 					<td colspan="2=" width="150">`+data11+`</td>	 
+	 					<td align=center>专业名称</td>
+	 					<td>`+data10+`</td>
+	 					<td height="35" align=center>学习形式</td>
+	 					<td colspan="2">`+data11+`</td>	 
 			 		</tr>
 	 
 	 				<tr>
-	 					<td width="70"  height="35" align=center>毕结业结论</td>
-	 					<td width="150">`+data12+`</td>
-	 					<td width="80"  height="35" align=center>证书编号</td>
-	 					<td colspan="2=" width="150">`+data13+`</td>	 
+	 					<td align=center>毕结业结论</td>
+	 					<td>`+data12+`</td>
+	 					<td align=center>证书编号</td>
+	 					<td colspan="2">`+data13+`</td>	 
 	 				</tr>
 	 
 					 <tr>
-	 					<td width="80"  height="120" align=center>在<br>线<br>验<br>证</td>
-	 					<td colspan="4=" ></td>	 
+	 					<td align=center>在<br>线<br>验<br>证</td>
+	 					<td colspan="4" ></td>	 
 	 				</tr>
-	
-	 				<tr>
-	 					<td colspan="5=" height="400" ></td>	 
-	 				</tr> 
 				</table>
-			</div>`;
+			</div>
+			<hr>
+			<div>`;
 	// html +=`<div>
 	// 			<ul class='cbp_tmtimeline'>
 	// 				<li> 

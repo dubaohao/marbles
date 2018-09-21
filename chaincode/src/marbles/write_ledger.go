@@ -568,10 +568,8 @@ func update_certInfo(stub shim.ChaincodeStubInterface, args []string) pb.Respons
 	}
 
 	id := args[0]
-	color := strings.ToLower(args[1])
-	size, err := strconv.Atoi(args[2])
-	owner_id := args[3]
-	authed_by_company := args[4]
+	owner_id := args[1]
+	authed_by_company := args[2]
 
 	data1 := args[3] //data1
 	data2 := args[4]
@@ -622,14 +620,7 @@ func update_certInfo(stub shim.ChaincodeStubInterface, args []string) pb.Respons
 	///共计写20个data属性值，改写color和size
 	res := `{
 		"docType":"marble", 
-		"id": "` + id + `",  
-		"color": "` + color + `",
-		"size": ` + strconv.Itoa(size) + `,
-		"owner": {
-			"id": "` + owner_id + `", 
-			"username": "` + owner.Username + `", 
-			"company": "` + owner.Company + `"
-		},
+		"id": "` + id + `", 
 		"data1": "` + data1 + `", 
 		"data2": "` + data2 + `", 
 		"data3": "` + data3 + `",
@@ -643,6 +634,11 @@ func update_certInfo(stub shim.ChaincodeStubInterface, args []string) pb.Respons
 		"data11": "` + data11 + `",
 		"data12": "` + data12 + `",
 		"data13": "` + data13 + `",
+		"owner": {
+			"id": "` + owner_id + `", 
+			"username": "` + owner.Username + `", 
+			"company": "` + owner.Company + `"
+		}	
 	}`
 
 	err = stub.PutState(args[0], []byte(res)) //rewrite the marble with id as key

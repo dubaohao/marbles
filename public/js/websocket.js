@@ -58,7 +58,7 @@ function connect_to_server() {
 	function onMessage(msg) {
 		try {
 			var msgObj = JSON.parse(msg.data);
-			// console.log("杜保皓websocket",msgObj);
+			console.log("杜保皓websocket_msgObj",msgObj);
 			
 			//marbles
 			if (msgObj.msg === 'everything') {

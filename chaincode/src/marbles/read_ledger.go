@@ -26,6 +26,7 @@ import (
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	pb "github.com/hyperledger/fabric/protos/peer"
+	"time"
 )
 
 // ============================================================================================================================
@@ -160,6 +161,7 @@ func read_everything(stub shim.ChaincodeStubInterface) pb.Response {
 func getHistory(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 	type AuditHistory struct {
 		TxId  string `json:"txId"`
+		Timestamp string `json:"timestamp"`
 		Value Marble `json:"value"`
 	}
 	var history []AuditHistory
@@ -187,6 +189,8 @@ func getHistory(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 
 		var tx AuditHistory
 		tx.TxId = historyData.TxId                 //copy transaction id over
+		// tx.Timestamp = time.Unix(historyData.Timestamp.Seconds,int64(historyData.Timestamp.Nanos)).String()
+		tx.Timestamp = time.Unix(historyData.Timestamp.Seconds+28800,int64(historyData.Timestamp.Nanos)).Format("2006-01-02 03:04:05 PM")
 		json.Unmarshal(historyData.Value, &marble) //un stringify it aka JSON.parse()
 		if historyData.Value == nil {              //marble has been deleted
 			var emptyMarble Marble
