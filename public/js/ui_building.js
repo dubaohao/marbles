@@ -100,7 +100,7 @@ function build_user_panels(data) {
 						` + disableHtml + `
 					</div>
 					<div class="innerMarbleWrap"><i class="fa fa-plus addMarble"></i></div>
-					<div class="noMarblesMsg hint">lost all marbles</div>
+					<div class="noMarblesMsg hint">none certs</div>
 				</div>`;
 
 		$('.companyPanel[company="' + data[i].company + '"]').find('.ownerWrap').append(html);
@@ -346,15 +346,11 @@ function build_a_tx(data, pos) {
 					<div class="marbleName txId">` + data.timestamp + `</div>
 				</p>
 				<p>
-					<div class="marbleLegend">Owner: </div>
+					<div class="marbleLegend">School: </div>
 					<div class="marbleName">` + username + `</div>
 				</p>
 				<p>
-					<div class="marbleLegend">Company: </div>
-					<div class="marbleName">` + company + `</div>
-				</p>
-				<p>
-					<div class="marbleLegend">Ower Id: </div>
+					<div class="marbleLegend">School Id: </div>
 					<div class="marbleName">` + id + `</div>
 				</p>
 			</div>
@@ -498,3 +494,6 @@ function build_a_tx(data, pos) {
 
 	return html;
 }
+
+
+//百度地图

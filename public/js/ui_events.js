@@ -401,7 +401,12 @@ $('#updateCertButton').click(function () {
 	// $('#checkConsistency').click(function () {
 	// 	$('#dateTrace, #tint').fadeOut();
 	// });
-
+//dubaohao-----------------baiduMap
+	$('#createCertificatesButton').click(function () {
+		console.log("chenchenhchcenheh");
+		window.location.href="/views/baiduMap.html";
+		console.log(window.location);
+	});
 
 	//story mode selection
 	$('#disableStoryMode').click(function () {

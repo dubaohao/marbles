@@ -1,0 +1,285 @@
+<!-- {%load staticfiles%} -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>教育分析系统</title>
+ 
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=jnvU9LrC98VKS9oBrGgfKkGzFGCK3TPo">
+    </script>
+    <script src="../public/baiduMap/static/js/jquery-3.0.0.min.js" type="text/javascript"></script>
+    <script src="../public/baiduMap/static/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../public/baiduMap/static/js/echarts.min.js" type="text/javascript"></script>
+    <script src="http://mapv.baidu.com/build/mapv.min.js"></script>
+    <link href="../public/baiduMap/static/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../public/baiduMap/static/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="../public/baiduMap/static/css/animate.min.css">
+</head>
+<body style="padding-bottom: 0">
+	 <div id = "transfer"  > <input type="text" name="test" id="sder" maxlength="15"  style="height:25px; font-size:6px;" size=30 baiduSug=1 value="请输入要查找高中学校的名称或代码" onfocus="javascript:if(this.value=='请输入要查找高中学校的名称或代码')this.value='';" onblur="javascript:if(this.value=='')this.value='请输入要查找高中学校的名称或代码';"/>
+<input type="button" id="button01" value="确认" style="margin-right:80px;">
+<input type="button" id="button06" value="全显" style="margin-right:80px;">
+ <input type="button" id="button02" value="清除" style="margin-right:80px;">
+<span id="firstButton" ><img src="../public/baiduMap/static/image/mark/1.png" /></span>：红&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<span id="secondButton" ><img src="../public/baiduMap/static/image/mark/2.png" /></span>：绿&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+</div>
+<div style='position:relative; width:100%; height:100%;' id='container'>
+    <div id="mymap"></div>
+    <div id="roadchart"></div>
+    <!--canvas  start-->
+    <div id="canvasContainer">
+        <div id="loading-center">
+            <div id="loading-center-absolute">
+                <div class="object" id="object_one"></div>
+                <div class="object" id="object_two"></div>
+                <div class="object" id="object_three"></div>
+                <div class="object" id="object_four"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script src="{% static '/js/index.js' %}"></script>
+
+
+<!--DATA -->
+<script>
+    var cluData=[["39.04995","117.22573","1"],["39.05321","117.22664","1"],["39.07348","117.22478","2"],["39.075281","117.227231","2"],["39.077386","117.22478","2"],["39.07808","117.23145","2"],["39.08003","117.24845","3"],["39.08061","117.222291","2"],["39.08137","117.25315","3"],["39.081463","117.229002","2"],["39.08172","117.25758","3"],["39.087278","117.259986","4"],["39.091281","117.259686","4"],["39.09517","117.26278","5"],["39.09772","117.26742","5"],["39.105794","117.272571","6"],["39.10907","117.27421","6"],["39.1142","117.26672","7"],["39.11507","117.27108","7"],["39.11718","117.19023","8"],["39.117338","117.261037","9"],["39.11852","117.18161","10"],["39.11878","117.26578","9"],["39.11878","117.271671","7"],["39.11898","117.18792","8"],["39.11964","117.17972","10"],["39.12097","117.19039","8"],["39.12341","117.23454","11"],["39.12398","117.19302","8"],["39.12528","117.19751","8"],["39.12693","117.19119","8"],["39.127012","117.235349","11"],["39.12742","117.23937","11"],["39.1283","117.18713","8"],["39.12845","117.18084","12"],["39.131306","117.177818","12"],["39.1352","117.189694","13"],["39.1368","117.191398","13"],["39.14194","117.21819","14"],["39.14247","117.22486","14"],["39.14384","117.22175","14"],["39.14484","117.18299","15"],["39.1456","117.20146","16"],["39.14641","117.21416","14"],["39.14772","117.199366","16"],["39.14812","117.18385","15"],["39.14819","117.22317","14"],["39.149682","117.229351","14"],["39.149814","117.229317","14"],["39.15073","117.21437","14"],["39.151349","117.226104","14"],["39.1514","117.222443","14"],["39.15208","117.20546","17"],["39.15279","117.2216","14"],["39.15328","117.218837","14"]];
+  
+// var ZhrData={{ tt|safe}};
+var ZhrDate=[1, "\u5317\u4eac\u5e02\u7b2c\u4e00\u4e2d\u5b66", "1101", "4", "2", "116.4066", "39.95385"]
+//alert(ZhrData)
+    var multiData =[];
+    for(var j = 0;j < ZhrData.length;j++){
+        multiData[j] = [];
+        multiData[j].push(ZhrData[j][5]);
+        multiData[j].push(ZhrData[j][6] );
+    }
+    //alert(ZhrData)
+</script>
+<!--地图初始化-->
+<script type="text/javascript">
+    var icon1 = new BMap.Icon('http://source.fooleap.org/marker.png', new BMap.Size(19,25),{anchor: new BMap.Size(9, 25)});//地点
+    var icon2 = new BMap.Icon("http://developer.baidu.com/map/jsdemo/img/Mario.png", new BMap.Size(30, 30), {anchor: new BMap.Size(13, 23)});//人物
+    var paths;
+    var signForPage = 1;
+    var signForDetailPieChart = 0;
+    var match=[];
+    var temp, matchpoints=[];
+    //创建地图实例
+    var map = new BMap.Map("mymap",{enableMapClick:true});
+    // 初始化地图,设置中心点坐标和地图级别
+    map.centerAndZoom(new BMap.Point(116.404177,39.909652), 14.5);
+    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+    map.setMapStyle({
+        styleJson:[
+            {
+                "featureType": "water",
+                "elementType": "all",
+                "stylers": {
+                    "color": "#eeeeee",
+                    "lightness": -5,
+                    "saturation": -24
+                }
+            },
+            {
+                "featureType": "all",
+                "elementType": "labels",
+                "stylers": {
+                    "visibility": "off"
+                }
+            },
+            {
+                "featureType": "subway",
+                "elementType": "all",
+                "stylers": {
+                    "color": "#eeeeee",
+                    "hue": "#000000",
+                    "saturation": -100
+                }
+            },
+            {
+                "featureType": "highway",
+                "elementType": "all",
+                "stylers": {
+                    "color": "#eeeeee"
+                }
+            },
+            {
+                "featureType": "land",
+                "elementType": "all",
+                "stylers": {
+                    "color": "#b6b6b6"
+                }
+            },
+            {
+                "featureType": "green",
+                "elementType": "all",
+                "stylers": {
+                    "color": "#b1b1b1"
+                }
+            },
+            {
+                "featureType": "manmade",
+                "elementType": "all",
+                "stylers": {
+                    "color": "#cccccc"
+                }
+            },
+            {
+                "featureType": "local",
+                "elementType": "all",
+                "stylers": {}
+            },
+            {
+                "featureType": "building",
+                "elementType": "all",
+                "stylers": {
+                    "color": "#eeeeee"
+                }
+            }
+        ]
+    });
+    var menu = new BMap.ContextMenu();
+    var txtMenuItem = [
+        {
+            text:'放大',
+            callback:function(){map.zoomIn()}
+        },
+        {
+            text:'缩小',
+            callback:function(){map.zoomOut()}
+        }
+    ];
+    for(var i=0; i < txtMenuItem.length; i++){
+        menu.addItem(new BMap.MenuItem(txtMenuItem[i].text,txtMenuItem[i].callback,100));
+    }
+    map.addContextMenu(menu);
+</script>
+<!--地图比例尺函数-->
+<script>
+	    function mySetZoom(points){
+        if(points.length>0){
+            var maxLng = points[0][0];
+            var minLng = points[0][0];
+            var maxLat = points[0][1];
+            var minLat = points[0][1];
+            var res;
+            //console.log(points.length);
+            for (var i = points.length-1; i >= 0; i--) {
+                res = points[i];
+                if(res[0]>maxLng) maxLng = res[0];
+                if(res[0]<minLng) minLng = res[0];
+                if(res[1]>maxLat) maxLat = res[1];
+                if(res[1]<minLat) minLat = res[1];
+            };
+            var cenLng =(parseFloat(maxLng)*3+parseFloat(minLng)*1)/4;
+            var cenLat = (parseFloat(maxLat)+parseFloat(minLat))/2;
+
+            var zoom = myGetZoom(maxLng, minLng, maxLat, minLat);
+            map.centerAndZoom(new BMap.Point(cenLng,cenLat), zoom);
+            //map.panTo(new BMap.Point(cenLng,cenLat));
+            //map.setZoom(zoom);
+            //map.zoomIn();
+        }
+    }
+    function myGetZoom (maxLng, minLng, maxLat, minLat) {
+        var zoom = ["50","100","200","500","1000","2000","5000","10000","20000","25000","50000","100000","200000","500000","1000000","2000000"]//级别18到3。
+        var pointA = new BMap.Point(maxLng,maxLat);  // 创建点坐标A
+        var pointB = new BMap.Point(minLng,minLat);  // 创建点坐标B
+        var distance = map.getDistance(pointA,pointB).toFixed(1);  //获取两点距离,保留小数点后两位
+        console.log(distance);
+        for (var i = 0,zoomLen = zoom.length; i < zoomLen; i++) {
+            if(zoom[i]*10 - distance > 0){
+                return 18-i;//之所以会多3，是因为地图范围常常是比例尺距离的10倍以上。所以级别会增加3。
+            }
+        }
+        return 3;
+    }
+</script>
+<!-- 清除 确定 全显 按钮函数-->
+<script>
+button02.onclick = function()
+    {map.clearOverlays();}
+
+
+button01.onclick = function()
+{
+
+  for(var m=0;m<ZhrData.length;m++)
+    {
+      if((document.getElementById("sder").value==ZhrData[m][1])||(document.getElementById("sder").value==ZhrData[m][2]))
+      {marking(m);
+        break;}
+      
+      if(m==(ZhrData.length-1))
+      {alert("数据库内暂无您输入的学校，请重新输入")}
+    }
+}
+
+function show()
+{
+ for(var m=0;m<ZhrData.length;m++)
+  {marking(m);}
+}
+
+button06.onclick = function(){
+       show();
+        }
+
+//show();
+
+</script>
+<!-- 展示marker函数-->
+<script>
+	function marking(m){
+                var point=new BMap.Point(multiData[m][0],multiData[m][1]);
+
+   /**/
+if(Number(ZhrData[m][0])<12){//这里是1 2 3 4 ……这么排列的
+if(Number(ZhrData[m][2])<=2)
+    {    
+        
+            var myIcon11 = new BMap.Icon("../public/baiduMap/static/image/mark/1.png", new BMap.Size(20, 32), {
+                   anchor: new BMap.Size(10, 30)});
+               		var marker=new BMap.Marker(point,{icon:myIcon11});
+if(Number(ZhrData[m][2])==0)
+       {marker.setTitle("区块链节点："+"\t"+(ZhrData[m][1])+"\n"+"签名信息"+"\t"+"通过"+"\n"+"地点"+"\t"+"通过"+"\n"+"时间戳"+"\t"+"通过"+"\n"+"身份状态(MVCC)"+"\t"+"通过"+"\n"+"数据真实性"+"\t"+"不通过")}
+if(Number(ZhrData[m][2])==1)
+               	        {marker.setTitle("区块链节点："+"\t"+(ZhrData[m][1])+"\n"+"签名信息"+"\t"+"通过"+"\n"+"地点"+"\t"+"通过"+"\n"+"时间戳"+"\t"+"不通过"+"\n"+"身份状态(MVCC)"+"\t"+"通过"+"\n"+"数据真实性"+"\t"+"通过");}
+if(Number(ZhrData[m][2])==2)	
+{marker.setTitle("区块链节点："+"\t"+(ZhrData[m][1])+"\n"+"签名信息"+"\t"+"不通过"+"\n"+"地点"+"\t"+"通过"+"\n"+"时间戳"+"\t"+"通过"+"\n"+"身份状态(MVCC)"+"\t"+"通过"+"\n"+"数据真实性"+"\t"+"通过");}
+    }
+
+else 
+    {    
+        var myIcon12 = new BMap.Icon("../public/baiduMap/static/image/mark/2.png", new BMap.Size(20, 32), {
+                   anchor: new BMap.Size(10, 30)});
+                  var marker=new BMap.Marker(point,{icon:myIcon12});   
+        	marker.setTitle("区块链节点："+"\t"+(ZhrData[m][1])+"\n"+"签名信息"+"\t"+"通过"+"\n"+"地点"+"\t"+"通过"+"\n"+"时间戳"+"\t"+"通过"+"\n"+"身份状态(MVCC)"+"\t"+"通过"+"\n"+"数据真实性"+"\t"+"通过");
+    }
+}
+var label = new BMap.Label(ZhrData[m][2],point);//ZhrData[m][2]
+                label.setStyle({
+                    color : "blue",
+                    fontSize : "15px",
+                    height : "0px",
+                    lineHeight : "0px",
+                    fontFamily:"微软雅黑"
+                });
+                 
+                //marker.setLabel(label);
+
+
+
+                marker.addEventListener("click", function()
+                {
+                  //showCharts(this.getTitle());
+                   window.location.href=this.getTitle();
+            })
+                 map.addOverlay(marker);
+              }
+        
+</script>
+
